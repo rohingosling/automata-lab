@@ -1,0 +1,316 @@
+{
+  "file_id": "automata-lab-state-machine",
+  "file_version": "1.0.0",
+  "settings": {
+    "name": "state_machine_light_switch",
+    "description": "Simple state machine to control a smart light switch.",
+    "version": "1.0.0"
+  },
+  "state_machine": {
+    "initial_state": "state_start",
+    "events": [
+      {
+        "name": "event_toggle_main_supply_on",
+        "description": "Turn on the mains electricity supply."
+      },
+      {
+        "name": "event_toggle_main_supply_off",
+        "description": "Turn off the mains electricity supply."
+      },
+      {
+        "name": "event_toggle_on",
+        "description": "Turn the switch on."
+      },
+      {
+        "name": "event_toggle_off",
+        "description": "Turn the switch off."
+      },
+      {
+        "name": "event_blow_fuse",
+        "description": "The light bulb fuse blows."
+      }
+    ],
+    "states": [
+      {
+        "name": "state_start",
+        "description": "Initial state."
+      },
+      {
+        "name": "state_on",
+        "description": "The light is on."
+      },
+      {
+        "name": "state_off",
+        "description": "The light is off."
+      },
+      {
+        "name": "state_fuse_blown",
+        "description": "The light bulb fuse has blown."
+      }
+    ],
+    "actions": [
+      {
+        "name": "action_device_connected",
+        "description": "Broadcast Event: Device connected."
+      },
+      {
+        "name": "action_device_disconnected",
+        "description": "Broadcast Event: Device disconnected."
+      },
+      {
+        "name": "action_light_on",
+        "description": "Broadcast Event: Light on."
+      },
+      {
+        "name": "action_light_off",
+        "description": "Broadcast Event: Light off."
+      },
+      {
+        "name": "action_fuse_blown",
+        "description": "Broadcast Event: Light bulb fuse blown."
+      }
+    ],
+    "state_actions": {
+      "entry": [
+        {
+          "state": "state_start",
+          "action": "action_device_disconnected"
+        },
+        {
+          "state": "state_on",
+          "action": "action_light_on"
+        },
+        {
+          "state": "state_off",
+          "action": "action_light_off"
+        },
+        {
+          "state": "state_fuse_blown",
+          "action": "action_fuse_blown"
+        }
+      ],
+      "exit": [
+        {
+          "state": "state_start",
+          "action": "action_device_connected"
+        }
+      ]
+    },
+    "transition_table": [
+      {
+        "state": "state_start",
+        "event": "event_toggle_main_supply_on",
+        "state_next": "state_off"
+      },
+      {
+        "state": "state_start",
+        "event": "event_toggle_on",
+        "state_next": "state_start"
+      },
+      {
+        "state": "state_start",
+        "event": "event_toggle_off",
+        "state_next": "state_start"
+      },
+      {
+        "state": "state_start",
+        "event": "event_blow_fuse",
+        "state_next": "state_fuse_blown"
+      },
+      {
+        "state": "state_off",
+        "event": "event_toggle_on",
+        "state_next": "state_on"
+      },
+      {
+        "state": "state_on",
+        "event": "event_toggle_off",
+        "state_next": "state_off"
+      },
+      {
+        "state": "state_off",
+        "event": "event_toggle_main_supply_off",
+        "state_next": "state_start"
+      },
+      {
+        "state": "state_on",
+        "event": "event_toggle_main_supply_off",
+        "state_next": "state_start"
+      },
+      {
+        "state": "state_off",
+        "event": "event_toggle_main_supply_on",
+        "state_next": "state_off"
+      },
+      {
+        "state": "state_on",
+        "event": "event_toggle_main_supply_on",
+        "state_next": "state_on"
+      },
+      {
+        "state": "state_off",
+        "event": "event_blow_fuse",
+        "state_next": "state_fuse_blown"
+      },
+      {
+        "state": "state_on",
+        "event": "event_blow_fuse",
+        "state_next": "state_fuse_blown"
+      },
+      {
+        "state": "state_fuse_blown",
+        "event": "event_toggle_main_supply_on",
+        "state_next": "state_fuse_blown"
+      },
+      {
+        "state": "state_fuse_blown",
+        "event": "event_toggle_main_supply_off",
+        "state_next": "state_fuse_blown"
+      },
+      {
+        "state": "state_fuse_blown",
+        "event": "event_toggle_on",
+        "state_next": "state_fuse_blown"
+      },
+      {
+        "state": "state_fuse_blown",
+        "event": "event_toggle_off",
+        "state_next": "state_fuse_blown"
+      }
+    ]
+  },
+  "chart": {
+    "settings": {
+      "expand_states": true,
+      "state_origin_centered": false
+    },
+    "indicators": {
+      "initial_state_indicator": {
+        "x": -150,
+        "y": -100,
+        "state": "state_start"
+      },
+      "terminal_state_indicators": [
+        {
+          "id": 0,
+          "x": 650,
+          "y": 1300
+        }
+      ],
+      "terminal_state_transitions": [
+        {
+          "state": "state_fuse_blown",
+          "terminal_state_indicator_id": 0
+        }
+      ]
+    },
+    "states": [
+      {
+        "state": "state_start",
+        "x": -300,
+        "y": 50,
+        "height": 300
+      },
+      {
+        "state": "state_on",
+        "x": 500,
+        "y": 50,
+        "height": 300
+      },
+      {
+        "state": "state_off",
+        "x": -300,
+        "y": 850,
+        "height": 300
+      },
+      {
+        "state": "state_fuse_blown",
+        "x": 500,
+        "y": 850,
+        "height": 300
+      }
+    ],
+    "draft_transitions": []
+  },
+  "solver": {
+    "sequences": [
+      {
+        "name": "sequence 1",
+        "description": "Sample sequence.",
+        "start_context": "initial",
+        "sequence": [
+          "event_toggle_main_supply_on",
+          "action_device_connected",
+          "event_toggle_on",
+          "action_light_on",
+          "event_toggle_off",
+          "action_light_off",
+          "event_toggle_on",
+          "action_light_on",
+          "event_blow_fuse",
+          "action_fuse_blown"
+        ]
+      },
+      {
+        "name": "sequence 2",
+        "description": "Another sample sequence",
+        "start_context": "continuation",
+        "sequence": [
+          "event_toggle_main_supply_on",
+          "event_toggle_on",
+          "event_toggle_off",
+          "event_toggle_on",
+          "event_toggle_off",
+          "event_toggle_on"
+        ]
+      },
+      {
+        "name": "sequence 3",
+        "description": "Yes another sample sequence.",
+        "start_context": "infer",
+        "sequence": [
+          "event_toggle_main_supply_on",
+          "event_toggle_on",
+          "event_toggle_main_supply_off",
+          "action_device_disconnected"
+        ]
+      }
+    ]
+  },
+  "simulator": {
+    "sequences": [
+      {
+        "name": "sequence 1",
+        "description": "Some test sequence.",
+        "sequence": [
+          "event_toggle_main_supply_on",
+          "event_toggle_on",
+          "event_toggle_off",
+          "event_toggle_on",
+          "event_blow_fuse"
+        ]
+      },
+      {
+        "name": "sequence 2",
+        "description": "Another test sequence.",
+        "sequence": [
+          "event_toggle_main_supply_on",
+          "event_toggle_on",
+          "event_toggle_off",
+          "event_toggle_on",
+          "event_toggle_off",
+          "event_toggle_on"
+        ]
+      },
+      {
+        "name": "sequence 3",
+        "description": "Yes another test sequence.",
+        "sequence": [
+          "event_toggle_main_supply_on",
+          "event_toggle_on",
+          "event_toggle_main_supply_off"
+        ]
+      }
+    ]
+  }
+}

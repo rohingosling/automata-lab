@@ -1,0 +1,15 @@
+Automata Lab 1.0.0
+Initial public release
+
+Highlights
+
+- Author and validate deterministic Moore-machine-inspired state transducers.
+- Edit one shared model through structured Editor and interactive State Chart workflows.
+- Infer reviewable models from partial observations with the Solver.
+- Host immutable revisions and run pinned Simulator sessions through the built-in browser server.
+- Import and export JSON and CSV data, print configurable reports, and export State Chart images.
+- Use bundled documentation, local search, accessible themes, keyboard workflows, and responsive layouts.
+
+Known issue
+
+- Opera may not render the Light theme correctly. Use Dark theme, Chrome, or Microsoft Edge until this is corrected.

@@ -1,0 +1,15 @@
+// /////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Name:    Server Worker Protocol Boundary
+// Version: 1.0.0
+// Date:    2026-08-14
+// Author:  Rohin Gosling
+//
+// Description:
+//
+//   Re-exports the Server Worker-owned protocol contract through the shared protocol boundary.
+//
+// /////////////////////////////////////////////////////////////////////////////////////////////////
+
+export type * from "../workers/server/protocol.js";
+export * from "../workers/server/protocol.js";

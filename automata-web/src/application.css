@@ -1,0 +1,3740 @@
+/* -------------------------------------------------------------------------------------------------
+ * Stylesheet: application.css
+ *
+ * Description:
+ *
+ *   Defines the application shell, editor, chart, solver, simulator, dialog, and print
+ *   presentation.
+ * ---------------------------------------------------------------------------------------------- */
+
+:root
+{
+    color-scheme: light;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+}
+
+*
+{
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root
+{
+    height: 100%;
+    margin: 0;
+    min-width: 0;
+    overflow: hidden;
+}
+
+button,
+input,
+select,
+textarea
+{
+    font: inherit;
+}
+
+button,
+input,
+select,
+summary,
+textarea,
+[role="gridcell"],
+[role="option"],
+[role="treeitem"],
+[role="separator"]
+{
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+textarea:focus-visible,
+[role="gridcell"]:focus-visible,
+[role="option"]:focus-visible,
+[role="treeitem"]:focus-visible,
+[role="separator"]:focus-visible
+{
+    outline-color: var(--focus);
+    outline-offset: 1px;
+}
+
+button
+{
+    align-items: center;
+    background: var(--control-surface);
+    border: 1px solid var(--control-border);
+    border-radius: 3px;
+    color: var(--text);
+    cursor: default;
+    display: inline-flex;
+    gap: 5px;
+    justify-content: center;
+    min-height: 26px;
+    padding: 3px 10px;
+}
+
+button:hover:not(:disabled)
+{
+    background: var(--control-hover);
+    border-color: var(--accent);
+}
+
+button:active:not(:disabled),
+button[aria-pressed="true"]
+{
+    background: var(--selection);
+}
+
+button:disabled
+{
+    color: var(--disabled-text);
+    cursor: not-allowed;
+    opacity: 0.72;
+}
+
+input,
+select,
+textarea
+{
+    background: var(--field-surface);
+    border: 1px solid var(--control-border);
+    border-radius: 2px;
+    color: var(--text);
+    min-height: 27px;
+    padding: 3px 6px;
+}
+
+input:not([type]):not([readonly]):not(:disabled),
+input[type="email"]:not([readonly]):not(:disabled),
+input[type="number"]:not([readonly]):not(:disabled),
+input[type="password"]:not([readonly]):not(:disabled),
+input[type="search"]:not([readonly]):not(:disabled),
+input[type="tel"]:not([readonly]):not(:disabled),
+input[type="text"]:not([readonly]):not(:disabled),
+input[type="url"]:not([readonly]):not(:disabled),
+textarea:not([readonly]):not(:disabled),
+[contenteditable]:not([contenteditable="false"])
+{
+    cursor: text;
+}
+
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"]
+{
+    border-color: var(--status-error);
+}
+
+input[type="checkbox"],
+input[type="radio"]
+{
+    accent-color: var(--accent);
+    min-height: auto;
+}
+
+textarea
+{
+    min-height: 74px;
+    resize: vertical;
+}
+
+a
+{
+    color: var(--link);
+}
+
+/* Initialize the desktop shell layout and shared theme values. */
+
+.application-shell
+{
+    --accent: #1663ad;
+    --application-title: #0e497f;
+    --border: #aeb8c2;
+    --console-error: #b42318;
+    --console-message: #357a38;
+    --console-surface: #f8fafc;
+    --console-warning: #075ea8;
+    --control-border: #8e9aa7;
+    --control-hover: #e7f1fb;
+    --control-surface: #f7f8fa;
+    --disabled-surface: #edf0f3;
+    --disabled-text: #67727d;
+    --error-surface: #fff0ef;
+    --field-surface: #ffffff;
+    --focus: #005fcc;
+    --link: #075ea8;
+    --menu-surface: #f4f6f8;
+    --panel-header: #e4eaf0;
+    --selection: #cfe7ff;
+    --selection-border: #2b78c2;
+    --server-connected: #337637;
+    --server-connecting: #8a5200;
+    --server-disconnected: #b42318;
+    --shadow: rgb(13 32 51 / 22%);
+    --status-error: #b42318;
+    --status-information: #075ea8;
+    --status-success: #357a38;
+    --status-warning: #8a5200;
+    --surface: #f1f3f5;
+    --surface-raised: #ffffff;
+    --text: #17212b;
+    --text-muted: #4e5d6b;
+    --warning-surface: #fff5d6;
+
+    background: var(--surface);
+    color: var(--text);
+    cursor: default;
+    display: grid;
+    font-size: 13px;
+    grid-template-rows: 34px 29px 38px 0 minmax(0, 1fr) 25px;
+    height: 100%;
+    min-width: 0;
+}
+
+.application-shell[data-theme="dark"]
+{
+    color-scheme: dark;
+    --accent: #f0f0f0;
+    --application-title: #2b2b2b;
+    --border: #555555;
+    --console-error: #ff7b72;
+    --console-message: #7ee787;
+    --console-surface: #161616;
+    --console-warning: #6cb6ff;
+    --control-border: #707070;
+    --control-hover: #383838;
+    --control-surface: #292929;
+    --disabled-surface: #222222;
+    --disabled-text: #8e8e8e;
+    --error-surface: #343434;
+    --field-surface: #181818;
+    --focus: #ffffff;
+    --link: #e0e0e0;
+    --menu-surface: #222222;
+    --panel-header: #2c2c2c;
+    --selection: #3d3d3d;
+    --selection-border: #d0d0d0;
+    --server-connected: #7ee787;
+    --server-connecting: #ffcc66;
+    --server-disconnected: #ff7b72;
+    --shadow: rgb(0 0 0 / 52%);
+    --status-error: #ff7b72;
+    --status-information: #6cb6ff;
+    --status-success: #7ee787;
+    --status-warning: #ffcc66;
+    --surface: #1b1b1b;
+    --surface-raised: #242424;
+    --text: #f2f2f2;
+    --text-muted: #bdbdbd;
+    --warning-surface: #303030;
+}
+
+.application-title-bar
+{
+    align-items: center;
+    background: linear-gradient(90deg, var(--application-title), color-mix(in srgb, var(--application-title), #ffffff 12%));
+    color: #ffffff;
+    display: flex;
+    gap: 8px;
+    padding: 0 10px;
+    user-select: none;
+}
+
+.application-icon
+{
+    height: 20px;
+    width: 20px;
+}
+
+.title-version
+{
+    margin-inline-start: auto;
+    opacity: 0.88;
+}
+
+.command-icon
+{
+    height: 16px;
+    object-fit: contain;
+    width: 16px;
+}
+
+.application-shell[data-theme="dark"] .command-icon,
+.application-shell[data-theme="dark"] .tree-icon
+{
+    filter: brightness(0) invert(1);
+}
+
+/* Arrange the menu bar and its nested command surfaces. */
+
+.menu-region
+{
+    background: var(--menu-surface);
+    border-bottom: 1px solid var(--border);
+    min-width: 0;
+    position: relative;
+    z-index: 20;
+}
+
+.menu-bar
+{
+    align-items: stretch;
+    display: flex;
+    height: 100%;
+    padding-inline-start: 3px;
+}
+
+.menu-root
+{
+    position: relative;
+}
+
+.menu-root-button
+{
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    height: 100%;
+    min-height: 0;
+    padding: 2px 12px;
+}
+
+.menu-root-button[aria-expanded="true"]
+{
+    background: var(--selection);
+}
+
+.menu-popup
+{
+    background: var(--menu-surface);
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 18px var(--shadow);
+    left: 0;
+    min-width: 260px;
+    padding: 4px;
+    position: absolute;
+    top: calc(100% - 1px);
+}
+
+.menu-popup-nested
+{
+    left: calc(100% - 3px);
+    top: -4px;
+}
+
+.menu-item-container
+{
+    position: relative;
+}
+
+.menu-item
+{
+    background: transparent;
+    border: 0;
+    display: grid;
+    grid-template-columns: 16px 18px minmax(130px, 1fr) auto 12px;
+    justify-content: stretch;
+    min-height: 26px;
+    padding: 2px 6px;
+    text-align: start;
+    width: 100%;
+}
+
+.menu-item:hover:not(:disabled),
+.menu-item:focus-visible
+{
+    background: var(--selection);
+}
+
+.menu-checkmark,
+.menu-icon-slot,
+.menu-arrow
+{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.menu-label
+{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.menu-shortcut
+{
+    color: var(--text-muted);
+    padding-inline: 12px 6px;
+}
+
+.menu-separator
+{
+    border-top: 1px solid var(--border);
+    margin: 4px 5px;
+}
+
+/* Arrange the primary toolbar, overflow controls, and responsive navigation. */
+
+.toolbar
+{
+    align-items: center;
+    background: var(--surface-raised);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    min-width: 0;
+    padding: 3px 6px;
+    position: relative;
+    z-index: 10;
+}
+
+.toolbar-landmark
+{
+    min-width: 0;
+}
+
+.toolbar-main
+{
+    align-items: center;
+    display: flex;
+    gap: 2px;
+    min-width: 0;
+}
+
+.toolbar-entry
+{
+    display: inline-flex;
+    position: relative;
+}
+
+.toolbar-button,
+.icon-button,
+.panel-close-button,
+.dialog-close-button
+{
+    height: 28px;
+    min-height: 28px;
+    padding: 3px;
+    width: 30px;
+}
+
+.toolbar-button .command-icon
+{
+    height: 20px;
+    width: 20px;
+}
+
+.toolbar-separator
+{
+    align-self: stretch;
+    border-left: 1px solid var(--border);
+    margin: 2px 5px;
+}
+
+.toolbar-choice-menu
+{
+    background: var(--menu-surface);
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 18px var(--shadow);
+    display: grid;
+    min-width: 128px;
+    padding: 4px;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    z-index: 40;
+}
+
+.toolbar-choice-menu button
+{
+    background: transparent;
+    border: 0;
+    display: grid;
+    gap: 6px;
+    grid-template-columns: 14px 1fr;
+    justify-content: stretch;
+    text-align: left;
+    width: 100%;
+}
+
+.toolbar-choice-menu button:hover,
+.toolbar-choice-menu button:focus-visible
+{
+    background: var(--selection);
+}
+
+.toolbar-overflow
+{
+    display: none;
+    margin-inline-start: auto;
+    position: relative;
+}
+
+.toolbar-overflow > summary
+{
+    align-items: center;
+    border: 1px solid var(--control-border);
+    border-radius: 3px;
+    display: flex;
+    font-size: 20px;
+    height: 28px;
+    justify-content: center;
+    list-style: none;
+    width: 32px;
+}
+
+.toolbar-overflow-menu
+{
+    background: var(--menu-surface);
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 18px var(--shadow);
+    display: grid;
+    max-height: min(420px, 70vh);
+    min-width: 230px;
+    overflow: auto;
+    padding: 4px;
+    position: absolute;
+    right: 0;
+    top: 30px;
+}
+
+.toolbar-overflow-menu button
+{
+    background: transparent;
+    border: 0;
+    justify-content: flex-start;
+}
+
+.responsive-region-navigation
+{
+    border: 0;
+    display: flex;
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    visibility: hidden;
+}
+
+/* Divide the main workspace into navigation, detail, Console, and splitter regions. */
+
+.workspace
+{
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) 6px var(--console-panel-height);
+    min-height: 0;
+    min-width: 0;
+}
+
+.application-shell[data-console-visible="false"] .workspace
+{
+    grid-template-rows: minmax(0, 1fr) 0 0;
+}
+
+.application-shell[data-console-visible="false"] .console-panel,
+.application-shell[data-console-visible="false"] .splitter-horizontal
+{
+    display: none;
+}
+
+.upper-workspace
+{
+    display: grid;
+    grid-template-columns: var(--master-panel-width) 6px minmax(0, 1fr);
+    min-height: 0;
+    min-width: 0;
+}
+
+.application-shell[data-master-visible="false"] .upper-workspace
+{
+    grid-template-columns: 0 0 minmax(0, 1fr);
+}
+
+.application-shell[data-master-visible="false"] .master-panel,
+.application-shell[data-master-visible="false"] .splitter-vertical
+{
+    display: none;
+}
+
+.master-panel,
+.detail-region,
+.console-panel
+{
+    background: var(--surface-raised);
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.master-panel
+{
+    border-inline-end: 1px solid var(--border);
+    display: grid;
+    grid-template-rows: 30px minmax(0, 1fr);
+}
+
+.panel-title-bar,
+.console-title-bar
+{
+    align-items: center;
+    background: var(--panel-header);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    min-width: 0;
+}
+
+.panel-title-bar h2,
+.console-title-bar h2
+{
+    font-size: 13px;
+    margin: 0;
+    padding: 5px 9px;
+}
+
+.panel-close-button
+{
+    border: 0;
+    margin-inline-start: auto;
+}
+
+.navigation-tree
+{
+    overflow: auto;
+    padding: 5px 3px;
+}
+
+.tree-row
+{
+    align-items: center;
+    border: 1px solid transparent;
+    display: flex;
+    gap: 5px;
+    min-height: 27px;
+    padding-block: 2px;
+    white-space: nowrap;
+}
+
+.tree-row:hover
+{
+    background: var(--control-hover);
+}
+
+.tree-row-selected
+{
+    background: var(--selection);
+    border-color: var(--selection-border);
+    font-weight: 600;
+}
+
+.tree-disclosure,
+.tree-disclosure-placeholder
+{
+    align-items: center;
+    background: transparent;
+    border: 0;
+    cursor: default;
+    display: inline-flex;
+    flex: 0 0 16px;
+    height: 20px;
+    justify-content: center;
+    min-height: 20px;
+    padding: 0;
+    width: 16px;
+}
+
+.tree-icon
+{
+    flex: 0 0 16px;
+    height: 16px;
+    object-fit: contain;
+    width: 16px;
+}
+
+.splitter
+{
+    align-items: center;
+    background: var(--surface);
+    display: flex;
+    justify-content: center;
+    touch-action: none;
+}
+
+.splitter:hover,
+.splitter:focus-visible
+{
+    background: var(--selection);
+}
+
+.splitter-vertical
+{
+    cursor: ew-resize;
+}
+
+.splitter-horizontal
+{
+    cursor: ns-resize;
+}
+
+.splitter-grip
+{
+    background: var(--border);
+    border-radius: 2px;
+}
+
+.splitter-vertical .splitter-grip
+{
+    height: 38px;
+    width: 2px;
+}
+
+.splitter-horizontal .splitter-grip
+{
+    height: 2px;
+    width: 38px;
+}
+
+.detail-page
+{
+    display: grid;
+    grid-template-rows: 30px minmax(0, 1fr);
+    height: 100%;
+    min-height: 0;
+}
+
+.detail-page-header
+{
+    align-items: center;
+    background: var(--panel-header);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    min-height: 0;
+    padding: 0;
+}
+
+.detail-page-header h1
+{
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0;
+    padding: 5px 9px;
+}
+
+.detail-page-content
+{
+    overflow: auto;
+    padding: 0;
+}
+
+/* The standard action panel spans the full page width, so its buttons align with the page edge and
+/* its own 8-pixel
+   inset is the only spacing above and below it. The panel must not compensate for parent padding,
+   so the page
+   inset lives on the content regions instead: every in-flow top-level region carries it, except the
+   panel.
+   Modal dialogs remain in the viewport layer. */
+
+.detail-page-content > *:not(.states-editor):not(.chart-page) > :not(.detail-button-panel):not(.solver-page-command-bar):not(.modal-dialog),
+.detail-page-content > .states-editor
+{
+    margin-inline: 18px;
+}
+
+.detail-page-content > *:not(.states-editor):not(.chart-page) > :first-child:not(.modal-dialog),
+.detail-page-content > .states-editor
+{
+    margin-block-start: 18px;
+}
+
+/* A page whose last region is not an action panel still needs the inset at the bottom. */
+
+.detail-page-content > *:not(.chart-page) > :last-child:not(.detail-button-panel):not(.solver-page-command-bar):not(.modal-dialog)
+{
+    margin-block-end: 18px;
+}
+
+.detail-page[data-route="chart"] .detail-page-content
+{
+    min-height: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.empty-state
+{
+    align-items: center;
+    border: 1px dashed var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 180px;
+    padding: 24px;
+    text-align: center;
+}
+
+.empty-state-mark
+{
+    color: var(--accent);
+    font-size: 32px;
+}
+
+.empty-state p
+{
+    color: var(--text-muted);
+    margin: 6px 0 0;
+    max-width: 620px;
+}
+
+/* Present disclosure controls and Console entries with severity, focus, and status cues. */
+
+.disclosure
+{
+    border-top: 1px solid var(--border);
+    margin-top: 18px;
+    padding-top: 10px;
+}
+
+.disclosure summary
+{
+    cursor: default;
+    font-weight: 600;
+}
+
+.console-panel
+{
+    background: var(--console-surface);
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+}
+
+.console-title-bar
+{
+    min-height: 35px;
+}
+
+.console-controls
+{
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    margin-inline-start: auto;
+    padding: 3px 7px;
+}
+
+.console-controls label,
+.checkbox-setting,
+.settings-choice-group label
+{
+    align-items: center;
+    display: inline-flex;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.console-controls button
+{
+    min-height: 25px;
+}
+
+.console-table
+{
+    overflow: auto;
+}
+
+.console-row
+{
+    display: grid;
+    gap: 8px;
+    grid-template-columns: 72px 92px 150px 108px minmax(220px, 1fr) auto;
+    min-height: 26px;
+    padding: 3px 8px;
+}
+
+.console-row:hover,
+.console-row:focus,
+.console-row[aria-selected="true"]:focus
+{
+    background: var(--selection);
+}
+
+.console-row[aria-selected="true"]:not(:focus)
+{
+    background: transparent;
+}
+
+.console-row-message
+{
+    border-inline-start: 4px solid var(--console-message);
+}
+
+.console-row-warning
+{
+    border-inline-start: 4px solid var(--console-warning);
+}
+
+.console-row-error
+{
+    border-inline-start: 4px solid var(--console-error);
+}
+
+.console-time,
+.console-code,
+.console-source
+{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.console-severity
+{
+    align-items: center;
+    display: flex;
+    gap: 5px;
+}
+
+.severity-symbol
+{
+    align-items: center;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: inline-flex;
+    font-size: 10px;
+    font-weight: 700;
+    height: 17px;
+    justify-content: center;
+    width: 17px;
+}
+
+.console-row-message .console-severity
+{
+    color: var(--console-message);
+}
+
+.console-row-warning .console-severity
+{
+    color: var(--console-warning);
+}
+
+.message-dialog-message .severity-symbol
+{
+    color: var(--status-information);
+}
+
+.message-dialog-warning .severity-symbol
+{
+    color: var(--status-warning);
+}
+
+.console-row-error .console-severity
+{
+    color: var(--console-error);
+}
+
+.message-dialog-error .severity-symbol
+{
+    color: var(--status-error);
+}
+
+.console-context button
+{
+    min-height: 21px;
+    padding-block: 1px;
+}
+
+.console-empty
+{
+    color: var(--text-muted);
+    margin: 0;
+    padding: 12px;
+}
+
+/* Present shell-owned document, connection, and contextual status values. */
+
+.status-bar
+{
+    align-items: center;
+    background: var(--panel-header);
+    border-top: 1px solid var(--border);
+    display: flex;
+    font-size: 11px;
+    gap: 0;
+    min-width: 0;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.status-bar > span
+{
+    border-inline-end: 1px solid var(--border);
+    padding: 3px 7px;
+}
+
+.connection-status
+{
+    margin-inline-start: auto;
+}
+
+.connection-symbol
+{
+    color: currentColor;
+    margin-inline-end: 4px;
+}
+
+.connection-value-connected
+{
+    color: var(--server-connected);
+}
+
+.connection-value-connecting
+{
+    color: var(--server-connecting);
+}
+
+.connection-value-disconnected
+{
+    color: var(--server-disconnected);
+}
+
+dialog
+{
+    background: transparent;
+    border: 0;
+    color: var(--text);
+    inset: 0;
+    margin: auto;
+    max-height: calc(100vh - 24px);
+    max-width: min(620px, calc(100vw - 24px));
+    padding: 0;
+    position: fixed;
+    width: 100%;
+}
+
+dialog::backdrop
+{
+    background: rgb(10 18 28 / 48%);
+}
+
+/* Constrain modal dialogs and their shared title, content, and action regions. */
+
+.dialog-window
+{
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    box-shadow: 0 12px 42px var(--shadow);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    max-height: calc(100vh - 24px);
+}
+
+.dialog-title-bar
+{
+    align-items: center;
+    background: var(--application-title);
+    color: #ffffff;
+    display: flex;
+    min-height: 34px;
+    padding-inline-start: 10px;
+}
+
+.dialog-title-bar h2
+{
+    font-size: 14px;
+    margin: 0;
+}
+
+.dialog-close-button
+{
+    background: transparent;
+    border: 0;
+    color: #ffffff;
+    margin-inline-start: auto;
+}
+
+.dialog-content
+{
+    overflow: auto;
+    padding: 18px;
+}
+
+.dialog-footer
+{
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    justify-content: flex-end;
+    padding: 8px;
+}
+
+.danger-button
+{
+    border-color: var(--status-error);
+    color: var(--status-error);
+}
+
+/* Wider than the other dialogs because license text is written to about 80 columns, and rewrapping
+/* it in a narrow
+   box makes it harder to read than the file it came from. Still bounded by the viewport on a small
+   screen. */
+
+.about-dialog
+{
+    height: min(660px, calc(100vh - 24px));
+    max-width: min(640px, calc(100vw - 24px));
+}
+
+.about-dialog .dialog-window
+{
+    height: 100%;
+}
+
+.about-dialog .dialog-content
+{
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr);
+}
+
+.about-content
+{
+    align-items: center;
+    display: flex;
+    gap: 12px;
+}
+
+.about-content > div:last-child
+{
+    display: grid;
+    gap: 2px;
+}
+
+.about-application-icon
+{
+    height: 40px;
+    image-rendering: auto;
+    width: 40px;
+}
+
+.about-dialog .tabs
+{
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    margin-block-start: 14px;
+    min-height: 0;
+}
+
+.about-dialog .tab-panel
+{
+    min-height: 0;
+    overflow: hidden;
+}
+
+.about-license
+{
+    display: grid;
+    gap: 6px;
+}
+
+.about-licences
+{
+    display: grid;
+    gap: 14px;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    height: 100%;
+    min-height: 0;
+}
+
+.about-licences .about-license
+{
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+}
+
+.about-license h3
+{
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Monospaced, because the notices carry their own column alignment and underlines. Fixed height
+/* with an internal
+   scroll: the licenses must not decide how tall the dialog is. */
+
+.about-license-text
+{
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    inline-size: 100%;
+    line-height: 1.45;
+    min-height: 0;
+    resize: none;
+}
+
+.about-release-notes,
+.about-release-notes .about-license
+{
+    height: 100%;
+    min-height: 0;
+}
+
+.about-release-notes .about-license
+{
+    grid-template-rows: auto minmax(0, 1fr);
+}
+
+.about-licences .about-license-text,
+.about-release-notes .about-license-text
+{
+    height: 100%;
+}
+
+.message-dialog-body
+{
+    align-items: flex-start;
+    display: flex;
+    gap: 10px;
+}
+
+.message-dialog-body p
+{
+    margin: 0;
+}
+
+.incomplete-document-warning-content
+{
+    display: grid;
+    gap: 10px;
+    max-width: min(560px, calc(100vw - 96px));
+}
+
+.incomplete-document-warning-content ul
+{
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding-inline-start: 20px;
+}
+
+.incomplete-document-warning-content li span
+{
+    display: block;
+}
+
+.csv-missing-reference-fields
+{
+    display: grid;
+    gap: 6px;
+    margin-block-start: 12px;
+}
+
+.csv-missing-reference-fields label:not(:first-child)
+{
+    margin-block-start: 6px;
+}
+
+.csv-missing-reference-fields textarea
+{
+    font-family: Consolas, "Courier New", monospace;
+    min-width: min(420px, calc(100vw - 72px));
+    width: 100%;
+}
+
+.settings-dialog
+{
+    max-width: 900px;
+}
+
+.settings-layout
+{
+    display: grid;
+    gap: 8px;
+    grid-template-columns: 180px minmax(0, 1fr);
+    min-height: 310px;
+}
+
+.settings-groups
+{
+    border: 1px solid var(--border);
+    display: grid;
+    grid-auto-rows: min-content;
+    overflow: auto;
+    padding: 3px;
+}
+
+.settings-groups button
+{
+    background: transparent;
+    border: 1px solid transparent;
+    justify-content: flex-start;
+}
+
+.settings-groups button[aria-selected="true"]
+{
+    background: var(--selection);
+    border-color: var(--selection-border);
+}
+
+.settings-detail
+{
+    border: 1px solid var(--border);
+    overflow: auto;
+    padding: 15px;
+}
+
+.settings-checkboxes
+{
+    display: grid;
+    gap: 11px;
+}
+
+.settings-chart-groups
+{
+    display: grid;
+    gap: 10px;
+}
+
+.settings-chart-groups .form-field
+{
+    margin-bottom: 0;
+}
+
+.settings-print-groups
+{
+    display: grid;
+    gap: 10px;
+}
+
+.settings-print-groups .form-field
+{
+    margin-bottom: 0;
+}
+
+.settings-print-sections
+{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.settings-print-sections legend
+{
+    grid-column: 1 / -1;
+}
+
+.settings-chart-groups select,
+.settings-chart-groups input[type="text"],
+.settings-chart-groups input[type="number"]
+{
+    min-width: 0;
+    width: 100%;
+}
+
+.settings-chart-groups input:disabled
+{
+    opacity: 0.65;
+}
+
+.grid-color-editor
+{
+    align-items: start;
+    display: grid;
+    gap: 6px;
+    grid-template-columns: 44px minmax(0, 1fr);
+}
+
+.grid-color-editor .grid-color-swatch
+{
+    cursor: default;
+    height: 29px;
+    padding: 2px;
+    width: 44px;
+}
+
+.grid-color-channels
+{
+    display: grid;
+    gap: 6px;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-color-channels .form-field
+{
+    gap: 4px;
+    grid-template-columns: auto minmax(0, 1fr);
+}
+
+.grid-color-channels .form-field > label
+{
+    padding-top: 5px;
+}
+
+.settings-choice-group
+{
+    border: 1px solid var(--border);
+    display: grid;
+    gap: 9px;
+    margin: 0;
+    padding: 10px;
+}
+
+.page-setup-dialog
+{
+    max-width: min(720px, calc(100vw - 24px));
+}
+
+.page-setup-choice-group
+{
+    border: 1px solid var(--border);
+    display: grid;
+    gap: 9px;
+    margin: 0 0 12px;
+    padding: 10px;
+}
+
+.page-setup-choice-group:last-child
+{
+    margin-bottom: 0;
+}
+
+.page-setup-choice-group .form-field
+{
+    margin-bottom: 0;
+}
+
+.page-setup-sections
+{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.page-setup-sections legend
+{
+    grid-column: 1 / -1;
+}
+
+.page-setup-section-option
+{
+    align-items: center;
+    display: flex;
+    gap: 7px;
+    min-width: 0;
+}
+
+/* Define shared form controls, data grids, tabs, and accessible utility states. */
+
+.print-report
+{
+    display: none;
+}
+
+.form-field
+{
+    align-items: start;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: var(--form-label-column-width, minmax(110px, 32%)) minmax(0, 1fr);
+    margin-bottom: 10px;
+}
+
+.form-field > label
+{
+    padding-top: 5px;
+}
+
+.form-field > div
+{
+    display: grid;
+    gap: 4px;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea
+{
+    width: 100%;
+}
+
+.form-field input[type="checkbox"],
+.form-field input[type="radio"]
+{
+    justify-self: start;
+    width: auto;
+}
+
+.field-description,
+.field-error
+{
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+.field-description
+{
+    color: var(--text-muted);
+}
+
+.field-error
+{
+    color: var(--status-error);
+}
+
+.entity-list,
+.data-grid
+{
+    border: 1px solid var(--border);
+    overflow: auto;
+}
+
+.entity-list-row
+{
+    border-bottom: 1px solid var(--border);
+    min-height: 27px;
+    padding: 4px 7px;
+}
+
+.entity-list-row[aria-selected="true"]
+{
+    background: var(--selection);
+}
+
+.data-grid > [role="row"]
+{
+    display: grid;
+    grid-auto-columns: minmax(120px, 1fr);
+    grid-auto-flow: column;
+}
+
+.data-grid [role="columnheader"],
+.data-grid [role="gridcell"]
+{
+    border-bottom: 1px solid var(--border);
+    border-inline-end: 1px solid var(--border);
+    min-height: 27px;
+    padding: 4px 7px;
+}
+
+.data-grid [role="columnheader"]
+{
+    background: var(--panel-header);
+    font-weight: 600;
+}
+
+.tab-list
+{
+    border-bottom: 1px solid var(--border);
+    display: flex;
+}
+
+.tab-list button
+{
+    border-bottom: 0;
+    border-radius: 3px 3px 0 0;
+}
+
+.tab-list button[aria-selected="true"]
+{
+    background: var(--surface-raised);
+    font-weight: 600;
+}
+
+.tab-panel
+{
+    padding: 10px;
+}
+
+.fatal-error
+{
+    background: #fff5f4;
+    color: #7a170f;
+    min-height: 100%;
+    padding: 32px;
+}
+
+.visually-hidden
+{
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+/* Reflow shell controls and workspace regions for narrower viewports. */
+
+@media (max-width: 1279px)
+{
+    .application-shell
+    {
+        grid-template-rows: 34px 29px 38px 34px minmax(0, 1fr) 25px;
+    }
+
+    .responsive-region-navigation
+    {
+        align-items: center;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 4px;
+        height: auto;
+        overflow: visible;
+        padding: 3px 6px;
+        visibility: visible;
+    }
+
+    .responsive-region-navigation button
+    {
+        min-height: 27px;
+    }
+
+    .workspace,
+    .application-shell[data-console-visible="false"] .workspace
+    {
+        display: block;
+        min-height: 0;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .upper-workspace,
+    .application-shell[data-master-visible="false"] .upper-workspace
+    {
+        display: block;
+        height: 100%;
+    }
+
+    .master-panel,
+    .detail-region,
+    .console-panel
+    {
+        height: 100%;
+        inset: 0;
+        position: absolute;
+        width: 100%;
+    }
+
+    .master-panel,
+    .detail-region,
+    .console-panel,
+    .application-shell[data-console-visible="false"] .console-panel,
+    .application-shell[data-master-visible="false"] .master-panel
+    {
+        display: none;
+    }
+
+    .application-shell[data-active-region="master"] .master-panel,
+    .application-shell[data-active-region="console"] .console-panel
+    {
+        display: grid;
+    }
+
+    .application-shell[data-active-region="detail"] .detail-region
+    {
+        display: block;
+    }
+
+    .splitter
+    {
+        display: none;
+    }
+
+    .console-row
+    {
+        grid-template-columns: 66px 86px 125px 92px minmax(180px, 1fr) auto;
+    }
+
+    .status-bar
+    {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 767px)
+{
+    .application-shell
+    {
+        font-size: 12px;
+        grid-template-rows: 32px 29px 38px 34px minmax(0, 1fr) 25px;
+    }
+
+    .application-title-bar
+    {
+        padding-inline: 7px;
+    }
+
+    .title-version
+    {
+        font-size: 11px;
+    }
+
+    .menu-root-button
+    {
+        padding-inline: 9px;
+    }
+
+    .menu-popup
+    {
+        max-height: 70vh;
+        max-width: calc(100vw - 8px);
+        min-width: min(260px, calc(100vw - 8px));
+        overflow: auto;
+    }
+
+    .menu-popup-nested
+    {
+        left: 4px;
+        top: 26px;
+    }
+
+    .toolbar-main
+    {
+        display: none;
+    }
+
+    .toolbar-overflow
+    {
+        display: block;
+    }
+
+    .detail-page-content > *:not(.states-editor):not(.chart-page) > :not(.detail-button-panel):not(.solver-page-command-bar):not(.modal-dialog),
+    .detail-page-content > .states-editor
+    {
+        margin-inline: 11px;
+    }
+
+    .detail-page-content > *:not(.states-editor):not(.chart-page) > :first-child:not(.modal-dialog),
+    .detail-page-content > .states-editor
+    {
+        margin-block-start: 11px;
+    }
+
+    .detail-page-content > *:not(.chart-page) > :last-child:not(.detail-button-panel):not(.solver-page-command-bar):not(.modal-dialog)
+    {
+        margin-block-end: 11px;
+    }
+
+    .empty-state
+    {
+        min-height: 150px;
+        padding: 15px;
+    }
+
+    .console-title-bar
+    {
+        align-items: stretch;
+        display: grid;
+    }
+
+    .console-controls
+    {
+        flex-wrap: wrap;
+        margin: 0;
+        padding-top: 0;
+    }
+
+    .console-row
+    {
+        gap: 4px;
+        grid-template-columns: 62px 84px minmax(120px, 1fr);
+    }
+
+    .console-code,
+    .console-source,
+    .console-context
+    {
+        display: none;
+    }
+
+    .console-text
+    {
+        grid-column: 1 / -1;
+    }
+
+    .settings-layout
+    {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .settings-groups
+    {
+        grid-auto-flow: column;
+        overflow-x: auto;
+    }
+
+    .settings-groups button
+    {
+        white-space: nowrap;
+    }
+
+    .form-field
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-detail .form-field
+    {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+    *,
+    *::before,
+    *::after
+    {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (forced-colors: active)
+{
+    .application-shell,
+    .application-shell[data-theme="dark"]
+    {
+        --accent: Highlight;
+        --application-title: CanvasText;
+        --border: CanvasText;
+        --console-error: LinkText;
+        --console-message: LinkText;
+        --console-surface: Canvas;
+        --console-warning: LinkText;
+        --control-border: ButtonText;
+        --control-hover: Highlight;
+        --control-surface: ButtonFace;
+        --disabled-surface: Canvas;
+        --disabled-text: GrayText;
+        --error-surface: Canvas;
+        --field-surface: Field;
+        --focus: Highlight;
+        --link: LinkText;
+        --menu-surface: Canvas;
+        --panel-header: Canvas;
+        --selection: Highlight;
+        --selection-border: Highlight;
+        --server-connected: LinkText;
+        --server-connecting: LinkText;
+        --server-disconnected: LinkText;
+        --status-error: LinkText;
+        --status-information: LinkText;
+        --status-success: LinkText;
+        --status-warning: LinkText;
+        --surface: Canvas;
+        --surface-raised: Canvas;
+        --text: CanvasText;
+        --text-muted: CanvasText;
+        --warning-surface: Canvas;
+    }
+
+    .application-title-bar,
+    .dialog-title-bar
+    {
+        border-bottom: 1px solid CanvasText;
+        color: Canvas;
+    }
+
+    .command-icon,
+    .tree-icon
+    {
+        filter: none !important;
+        forced-color-adjust: auto;
+    }
+
+    .tree-row-selected,
+    .entity-list-row[aria-selected="true"]
+    {
+        color: HighlightText;
+    }
+
+    .console-row[aria-selected="true"]:not(:focus)
+    {
+        background: Canvas;
+        color: CanvasText;
+        forced-color-adjust: none;
+    }
+
+    .data-grid .editable-grid-cell[data-active="true"]::after
+    {
+        border-color: Highlight;
+        forced-color-adjust: none;
+    }
+}
+
+/* Present Editor pages, forms, entity lists, and ordered association controls. */
+
+.dirty-marker
+{
+    color: var(--status-warning);
+    font-weight: 700;
+}
+
+.editor-no-document
+{
+    margin: auto;
+    max-width: 430px;
+}
+
+.detail-button-panel
+{
+    align-items: center;
+    display: flex;
+    gap: 6px;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    min-inline-size: max-content;
+    padding: 8px;
+}
+
+.editor-info-page
+{
+    display: grid;
+    gap: 8px;
+    grid-template-rows: minmax(0, 1fr) auto;
+    height: 100%;
+    min-height: 0;
+}
+
+.editor-dashboard
+{
+    --editor-info-label-column-width: 180px;
+
+    display: grid;
+    gap: 12px;
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+    overflow: auto;
+}
+
+.editor-dashboard fieldset,
+.editor-form fieldset
+{
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    margin: 0;
+    padding: 12px;
+}
+
+.editor-dashboard legend
+{
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0 4px;
+}
+
+.editor-dashboard dl,
+.impact-summary
+{
+    margin: 0;
+}
+
+.editor-dashboard dl > div,
+.impact-summary > div
+{
+    display: grid;
+    gap: 10px;
+    padding: 3px 0;
+}
+
+.editor-dashboard dl > div
+{
+    grid-template-columns: var(--editor-info-label-column-width) minmax(0, 1fr);
+}
+
+.impact-summary > div
+{
+    grid-template-columns: minmax(130px, 0.9fr) minmax(0, 1.1fr);
+}
+
+.editor-dashboard dt,
+.impact-summary dt
+{
+    color: var(--text-muted);
+}
+
+.editor-dashboard dd,
+.impact-summary dd
+{
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.validation-status
+{
+    border-inline-start: 4px solid var(--border);
+    font-weight: 600;
+    margin: 0 0 8px;
+    padding: 5px 8px;
+}
+
+.validation-passed
+{
+    border-color: var(--status-success);
+    color: var(--status-success);
+}
+
+.validation-failed
+{
+    background: var(--error-surface);
+    border-color: var(--status-error);
+    color: var(--status-error);
+}
+
+.validation-not-validated
+{
+    border-color: var(--status-information);
+    color: var(--status-information);
+}
+
+.editor-form
+{
+    display: grid;
+    gap: 12px;
+}
+
+.initialization-form
+{
+    --initialization-label-column-width: 14.3ch;
+}
+
+.initialization-form .form-field
+{
+    grid-template-columns: var(--initialization-label-column-width) minmax(0, 1fr);
+}
+
+.editor-form legend
+{
+    font-weight: 600;
+    padding: 0 4px;
+}
+
+.editor-list-page,
+.editor-grid-page,
+.state-actions-pane
+{
+    display: grid;
+    gap: 8px;
+    grid-template-rows: minmax(120px, 1fr) auto;
+    height: 100%;
+    min-height: 260px;
+}
+
+.editor-info-actions,
+.editor-list-actions
+{
+    border-top: 1px solid var(--border);
+}
+
+.states-editor
+{
+    display: grid;
+    grid-template-columns: minmax(370px, var(--state-list-width)) 8px minmax(370px, 1fr);
+    height: calc(100% - 18px);
+    min-height: 320px;
+}
+
+.states-list-pane
+{
+    display: grid;
+    gap: 8px;
+    grid-template-rows: minmax(120px, 1fr) auto;
+    min-width: 0;
+    padding-inline-end: 8px;
+}
+
+.state-association-pane
+{
+    min-width: 0;
+    padding-inline-start: 8px;
+}
+
+.state-association-pane .tabs,
+.state-association-pane .tab-panel
+{
+    height: 100%;
+}
+
+.editor-empty-message
+{
+    align-self: center;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: center;
+}
+
+.data-grid [role="row"][aria-selected="true"] [role="gridcell"]
+{
+    background: var(--selection);
+}
+
+.data-grid .editable-grid-cell
+{
+    outline: 0;
+    padding: 0;
+    position: relative;
+}
+
+.data-grid .editable-grid-cell[data-active="true"]::after
+{
+    border: 2px solid var(--focus);
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 2;
+}
+
+.drop-down-list-box
+{
+    align-items: stretch;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 26px;
+    min-height: 27px;
+    width: 100%;
+}
+
+.progressive-select
+{
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+}
+
+.drop-down-list-box-value
+{
+    align-items: center;
+    display: flex;
+    min-width: 0;
+    overflow: hidden;
+    padding: 3px 7px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.drop-down-list-box-button
+{
+    border-block: 0;
+    border-inline-end: 0;
+    border-radius: 0;
+    min-height: 27px;
+    padding: 0;
+    width: 26px;
+}
+
+.drop-down-list-box-popup
+{
+    background: var(--menu-surface);
+    border: 1px solid var(--control-border);
+    box-shadow: 0 5px 16px var(--shadow);
+    overflow: auto;
+    padding: 2px;
+    position: fixed;
+    z-index: 100;
+}
+
+.drop-down-list-box-option,
+.drop-down-list-box-empty
+{
+    min-height: 27px;
+    overflow: hidden;
+    padding: 4px 7px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.drop-down-list-box-option[data-active="true"]
+{
+    background: var(--control-hover);
+    outline: 1px solid var(--focus);
+    outline-offset: -1px;
+}
+
+.drop-down-list-box-option[aria-selected="true"]
+{
+    background: var(--selection);
+    font-weight: 600;
+}
+
+.drop-down-list-box-empty
+{
+    color: var(--text-muted);
+}
+
+.data-grid [role="row"][aria-selected="true"] .drop-down-list-box
+{
+    background: var(--selection);
+}
+
+.impact-summary
+{
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    padding: 8px;
+}
+
+.field-help
+{
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Present Solver observations, candidate review, progress, and reports. */
+
+.solver-sequence-workspace,
+.solver-candidate-review
+{
+    display: grid;
+    gap: 10px;
+    height: 100%;
+    min-height: 340px;
+}
+
+.solver-sequence-workspace
+{
+    grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.solver-candidate-review
+{
+    grid-template-rows: auto auto minmax(0, 1fr);
+}
+
+.solver-panes
+{
+    display: grid;
+    grid-template-columns: minmax(var(--solver-sequence-list-minimum-width), var(--solver-sequence-list-width)) 8px minmax(360px, 1fr);
+    min-height: 0;
+}
+
+.solver-sequence-list
+{
+    display: grid;
+    gap: 7px;
+    grid-template-rows: auto minmax(140px, 1fr) auto;
+    min-height: 0;
+}
+
+.solver-token-editor
+{
+    display: grid;
+    gap: 7px;
+    grid-template-rows: auto minmax(140px, 1fr) auto;
+    min-height: 0;
+}
+
+.solver-sequence-list
+{
+    padding-inline-end: 12px;
+}
+
+.solver-token-editor
+{
+    padding-inline-start: 12px;
+}
+
+.solver-sequence-list h2,
+.solver-token-editor h2,
+.solver-candidate-review h2
+{
+    font-size: 13px;
+    margin: 0;
+}
+
+.solver-sequence-list select,
+.solver-token-editor textarea
+{
+    min-height: 140px;
+    width: 100%;
+}
+
+.solver-token-editor textarea
+{
+    block-size: 100%;
+    font-family: Consolas, "Courier New", monospace;
+    line-height: 1.45;
+    min-height: 0;
+    resize: none;
+}
+
+.solver-token-editor .solver-token-errors
+{
+    grid-row: 3;
+}
+
+.list-command-bar,
+.solver-page-command-bar
+{
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 5px;
+    justify-content: flex-end;
+    min-inline-size: max-content;
+}
+
+.solver-page-command-bar
+{
+    border-top: 1px solid var(--border);
+    gap: 6px;
+    justify-content: flex-end;
+    padding: 8px;
+}
+
+.solver-progress-status
+{
+    align-items: center;
+    display: flex;
+    gap: 7px;
+    margin-inline-end: auto;
+    min-inline-size: 0;
+}
+
+.solver-progress-status span
+{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.solver-progress-status progress
+{
+    inline-size: 130px;
+}
+
+.solver-token-errors,
+.solver-stale-warning
+{
+    background: var(--error-surface);
+    border-inline-start: 4px solid var(--status-error);
+    margin: 0;
+    padding: 7px 10px;
+}
+
+.solver-token-errors
+{
+    max-height: 84px;
+    overflow: auto;
+    padding-inline-start: 28px;
+}
+
+.solver-candidate-review .tabs,
+.solver-candidate-review .tab-panel
+{
+    height: 100%;
+    min-height: 0;
+}
+
+.solver-candidate-review .tab-list
+{
+    overflow-x: auto;
+}
+
+.solver-candidate-review .tab-panel
+{
+    overflow: auto;
+}
+
+.data-table
+{
+    border-collapse: collapse;
+    inline-size: 100%;
+}
+
+.data-table th,
+.data-table td
+{
+    border: 1px solid var(--border);
+    padding: 5px 7px;
+    text-align: start;
+    vertical-align: top;
+}
+
+.data-table thead th
+{
+    background: var(--panel-header);
+    position: sticky;
+    top: 0;
+}
+
+.solver-review-table
+{
+    border-collapse: collapse;
+    inline-size: 100%;
+}
+
+.solver-review-scroll
+{
+    max-height: 100%;
+    min-height: 0;
+    overflow: auto;
+}
+
+.solver-review-table th,
+.solver-review-table td
+{
+    border: 1px solid var(--border);
+    padding: 5px 7px;
+    text-align: start;
+    vertical-align: top;
+}
+
+.solver-review-table thead th
+{
+    background: var(--panel-header);
+    position: sticky;
+    top: 0;
+}
+
+.solver-summary-grid dl
+{
+    display: grid;
+    gap: 4px;
+    margin: 0;
+}
+
+.solver-summary-grid dl > div
+{
+    display: grid;
+    gap: 10px;
+    grid-template-columns: minmax(150px, 0.35fr) minmax(0, 1fr);
+}
+
+.solver-summary-grid dd
+{
+    margin: 0;
+}
+
+/* Present the Chart palette, canvas, nodes, transitions, controls, and diagnostics. */
+
+.chart-page
+{
+    display: grid;
+    grid-template-columns: 176px minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    height: 100%;
+    min-height: 0;
+    min-width: 0;
+}
+
+.chart-palette
+{
+    align-content: start;
+    background: var(--surface);
+    border-inline-end: 1px solid var(--border);
+    display: grid;
+    gap: 8px;
+    grid-column: 1;
+    grid-row: 1;
+    min-height: 0;
+    overflow: auto;
+    padding: 8px;
+}
+
+.chart-palette h2
+{
+    font-size: 12px;
+    margin: 0 0 3px;
+}
+
+.chart-palette > button
+{
+    align-items: center;
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    flex-direction: column;
+    gap: 3px;
+    justify-content: center;
+    min-width: 0;
+    min-height: 58px;
+    padding: 5px;
+    text-align: center;
+}
+
+.chart-palette > button:hover:not(:disabled),
+.chart-palette > button:active:not(:disabled),
+.chart-palette > button:focus-visible
+{
+    background: var(--surface-raised);
+    border-color: var(--selection-border);
+}
+
+.chart-canvas .react-flow__resize-control.handle
+{
+    background: transparent;
+    border: 0;
+    height: 24px;
+    width: 24px;
+}
+
+.chart-canvas .react-flow__resize-control.handle::after
+{
+    background: var(--surface);
+    border: 1px solid var(--selection-border);
+    content: "";
+    height: 6px;
+    inset: 8px;
+    position: absolute;
+    width: 6px;
+}
+
+.chart-canvas .react-flow__resize-control.line
+{
+    border-color: var(--selection-border);
+}
+
+.chart-canvas .chart-state-height-resizer
+{
+    border-width: 0;
+    height: 24px;
+    left: 0;
+    width: 100%;
+}
+
+.chart-canvas .chart-state-height-resizer::after
+{
+    background: var(--surface);
+    border: 1px solid var(--selection-border);
+    content: "";
+    height: 6px;
+    left: calc(50% - 4px);
+    position: absolute;
+    top: 8px;
+    width: 6px;
+}
+
+.chart-canvas .chart-state-height-resizer-top
+{
+    top: -12px;
+}
+
+.chart-canvas .chart-state-height-resizer-bottom
+{
+    bottom: -12px;
+}
+
+.chart-canvas
+{
+    background: var(--field-surface);
+    grid-column: 2;
+    grid-row: 1;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.chart-canvas .react-flow
+{
+    background: var(--field-surface);
+    color: var(--text-muted);
+}
+
+.chart-canvas .react-flow__node
+{
+    border-radius: 10px;
+}
+
+.chart-canvas .react-flow__node:focus-visible
+{
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+}
+
+/* React Flow paints the attribution on a translucent light overlay of its own. Over a dark canvas
+/* that lands between
+   the two palettes and drops the link below the contrast threshold, so the surface is taken from
+   our tokens instead. */
+
+.chart-canvas .react-flow__attribution
+{
+    background: var(--surface-raised);
+}
+
+.chart-canvas .react-flow__attribution a
+{
+    color: var(--text-muted);
+}
+
+.chart-state-node
+{
+    background: var(--surface-raised);
+    border: 2px solid var(--text-muted);
+    border-radius: 10px;
+    color: var(--text);
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+
+.chart-node-selected
+{
+    border-color: var(--selection-border);
+    box-shadow: 0 0 0 3px var(--selection);
+}
+
+.chart-state-header
+{
+    align-items: flex-start;
+    display: flex;
+    gap: 7px;
+    justify-content: center;
+    min-height: 33px;
+    padding: 9px 11px 4px;
+    text-align: center;
+}
+
+.chart-state-header strong
+{
+    overflow-wrap: normal;
+}
+
+
+.chart-state-markers
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+    min-height: 20px;
+    padding: 0 7px 6px;
+}
+
+.chart-semantic-marker
+{
+    background: var(--selection);
+    border: 1px solid var(--selection-border);
+    border-radius: 9px;
+    font-size: 9px;
+    padding: 1px 6px;
+}
+
+.chart-state-compartments
+{
+    border-top: 1px solid var(--text-muted);
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.chart-state-compartments section
+{
+    min-height: 50px;
+    padding: 5px 10px 7px;
+}
+
+.chart-state-compartments section + section
+{
+    border-top: 1px solid var(--border);
+}
+
+.chart-state-compartments h3
+{
+    font-size: 10px;
+    margin: 0 0 3px;
+}
+
+.chart-action-list
+{
+    font-size: 10px;
+    margin: 0;
+    padding-inline-start: 19px;
+}
+
+.chart-empty-actions
+{
+    color: var(--text-muted);
+    font-size: 10px;
+    margin: 0;
+}
+
+.chart-indicator-node
+{
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    color: var(--text-muted);
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Grid styles. Dots and Solid use React Flow's own dot and line patterns unchanged; Dotted is the
+/* same line pattern
+   drawn with a dashed stroke, so all three share one lattice and one alignment. */
+
+.chart-grid-dotted .react-flow__background-pattern
+{
+    stroke-dasharray: 1 3;
+}
+
+.chart-indicator-symbol
+{
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+}
+
+.chart-draft-transition-node
+{
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    color: var(--text-muted);
+    height: 100%;
+    width: 100%;
+}
+
+.chart-draft-transition-node svg
+{
+    display: block;
+    overflow: visible;
+}
+
+.chart-draft-transition-node > svg > path
+{
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+}
+
+.chart-draft-transition-node.chart-node-selected
+{
+    border-color: var(--selection-border);
+    border-radius: 4px;
+}
+
+.chart-canvas .react-flow__viewport-portal
+{
+    pointer-events: none;
+    z-index: 4;
+}
+
+.chart-transition-debug-overlay
+{
+    height: 100%;
+    inset: 0;
+    overflow: visible;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+}
+
+.chart-draft-transition-endpoint,
+.chart-transition-endpoint
+{
+    background: var(--field-surface);
+    border: 2px solid var(--selection-border);
+    border-radius: 50%;
+    box-sizing: border-box;
+    height: 16px;
+    min-width: 16px;
+    padding: 0;
+    pointer-events: auto;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 16px;
+
+    /* Endpoint controls sit on a state boundary, so they must clear React Flow's selected-node
+    /* elevation. A
+       self-transition puts both endpoints on one edge, where a node painted above them cannot be
+       grabbed at all. */
+
+    z-index: 1001;
+}
+
+.chart-draft-transition-endpoint:hover,
+.chart-draft-transition-endpoint:focus-visible,
+.chart-transition-endpoint:hover,
+.chart-transition-endpoint:focus-visible
+{
+    background: var(--selection);
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+}
+
+.chart-draft-transition-endpoint
+{
+    height: 24px;
+    min-width: 24px;
+    width: 24px;
+}
+
+.chart-initial-indicator .chart-indicator-symbol
+{
+    background: currentColor;
+    height: 50px;
+    width: 50px;
+}
+
+.chart-terminal-indicator .chart-indicator-symbol
+{
+    background: var(--field-surface);
+    border: 6px solid currentColor;
+    height: 60px;
+    width: 60px;
+}
+
+/* The inner disc of the UML final-state ring. The 60-pixel symbol is border-box, so its 6-pixel
+/* border leaves a
+   48-pixel interior; a 30-pixel disc inset by 9 sits exactly centred within it. */
+
+.chart-terminal-indicator .chart-indicator-symbol::after
+{
+    background: currentColor;
+    border-radius: 50%;
+    content: "";
+    height: 30px;
+    inset: 9px;
+    position: absolute;
+    width: 30px;
+}
+
+.chart-canvas .react-flow__handle
+{
+    background: transparent;
+    border: 0;
+    height: 14px;
+    opacity: 0;
+    width: 14px;
+}
+
+.chart-canvas .react-flow__edge-path
+{
+    stroke: var(--text-muted);
+    stroke-dasharray: none;
+    stroke-width: 1.8;
+}
+
+.chart-canvas .react-flow__edge.selected .react-flow__edge-path
+{
+    stroke: var(--selection-border);
+    stroke-width: 3;
+}
+
+.chart-canvas .chart-indicator-edge .react-flow__edge-path
+{
+    stroke: var(--text-muted);
+    stroke-dasharray: none;
+}
+
+.chart-footer
+{
+    align-items: center;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: flex;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    min-width: 0;
+    overflow-x: auto;
+    padding: 0;
+}
+
+.chart-command-panel
+{
+    margin-inline-start: auto;
+}
+
+.chart-canvas .react-flow__edge-text
+{
+    fill: var(--text);
+    font-size: 10px;
+    white-space: pre;
+}
+
+.chart-canvas .react-flow__edge-textbg
+{
+    fill: var(--surface-raised);
+    fill-opacity: 0.92;
+}
+
+.chart-canvas .react-flow__controls
+{
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.chart-canvas .react-flow__controls-button
+{
+    background: var(--control-surface);
+    border-color: var(--border);
+    color: var(--text);
+}
+
+.chart-canvas .react-flow__controls-button svg
+{
+    fill: currentColor;
+}
+
+.chart-large-graph,
+.chart-no-document
+{
+    margin: auto;
+    max-width: 620px;
+    padding: 24px;
+}
+
+.chart-large-graph dl
+{
+    display: flex;
+    gap: 24px;
+}
+
+.chart-large-graph dl > div
+{
+    display: flex;
+    gap: 6px;
+}
+
+.chart-large-graph dd
+{
+    font-weight: 700;
+    margin: 0;
+}
+
+.solver-chart
+{
+    border: 1px solid var(--border);
+    cursor: grab;
+    height: 100%;
+    min-height: 300px;
+    overflow: hidden;
+    overscroll-behavior: contain;
+    touch-action: none;
+    user-select: none;
+}
+
+@media ( max-width: 767px )
+{
+    .chart-page
+    {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr) auto;
+    }
+
+    .chart-palette
+    {
+        border-bottom: 1px solid var(--border);
+        border-inline-end: 0;
+        grid-column: 1;
+        grid-row: 1;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-height: 180px;
+    }
+
+    .chart-palette h2
+    {
+        grid-column: 1 / -1;
+    }
+
+    .chart-canvas
+    {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .chart-footer
+    {
+        grid-column: 1;
+        grid-row: 3;
+    }
+}
+
+@media ( forced-colors: active )
+{
+    .chart-state-node,
+    .chart-indicator-node,
+    .chart-draft-transition-node,
+    .chart-draft-transition-endpoint,
+    .chart-transition-endpoint,
+    .chart-semantic-marker
+    {
+        forced-color-adjust: auto;
+    }
+
+    .chart-node-selected
+    {
+        outline: 3px solid Highlight;
+    }
+}
+
+.solver-chart[data-panning="true"]
+{
+    cursor: grabbing;
+}
+
+.solver-chart svg
+{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.solver-chart-transition-line,
+.solver-chart-state-divider
+{
+    fill: none;
+    stroke: var(--text-muted);
+    stroke-width: 1.5;
+}
+
+.solver-chart-transition-line
+{
+    marker-end: url("#solver-candidate-arrow");
+}
+
+.solver-chart-arrow
+{
+    fill: var(--text-muted);
+}
+
+.solver-chart-state-box
+{
+    fill: var(--surface-raised);
+    stroke: var(--text-muted);
+    stroke-width: 1.5;
+}
+
+.solver-chart text
+{
+    fill: var(--text);
+    font-family: "Segoe UI", sans-serif;
+    font-size: 11px;
+}
+
+.solver-chart-state-name
+{
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.solver-chart-action-heading
+{
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.solver-chart-action-name,
+.solver-chart-event-name
+{
+    font-size: 10px;
+}
+
+.solver-chart .solver-chart-marker
+{
+    fill: var(--status-information);
+    font-weight: 700;
+}
+
+.solver-report-list,
+.solver-coverage-list
+{
+    margin: 0;
+    padding: 6px 8px 6px 28px;
+}
+
+.solver-report-list p
+{
+    margin: 3px 0 10px;
+}
+
+@media (max-width: 767px)
+{
+    .solver-panes
+    {
+        grid-template-columns: 1fr;
+        overflow: auto;
+    }
+
+    .solver-panes > .splitter
+    {
+        display: none;
+    }
+
+    .solver-sequence-list
+    {
+        border-block-end: 1px solid var(--border);
+        border-inline-end: 0;
+        padding-block-end: 12px;
+        padding-inline-end: 0;
+    }
+
+    .solver-token-editor
+    {
+        padding-inline-start: 0;
+    }
+
+    .list-command-bar,
+    .solver-page-command-bar
+    {
+        gap: 6px;
+    }
+
+    .list-command-bar button,
+    .solver-page-command-bar button
+    {
+        padding-inline: 5px;
+    }
+
+    .detail-button-panel button
+    {
+        padding-inline: 5px;
+    }
+
+    .editor-dashboard
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .editor-dashboard dl > div
+    {
+        gap: 2px;
+        grid-template-columns: 1fr;
+    }
+
+    .initialization-form .form-field
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .states-editor
+    {
+        display: block;
+    }
+
+    .states-editor > .splitter
+    {
+        display: none;
+    }
+
+    .states-list-pane,
+    .state-association-pane
+    {
+        min-height: 240px;
+        padding: 0;
+    }
+
+    .state-association-pane
+    {
+        margin-top: 12px;
+    }
+}
+
+/* Simulator ------------------------------------------------------------------------------------ */
+
+.simulator-workspace
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    min-height: 340px;
+}
+
+.simulator-workspace > .simulator-panes
+{
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.simulator-blocked
+{
+    background: var(--surface-raised);
+    border-inline-start: 4px solid var(--status-warning);
+    padding: 7px 10px;
+}
+
+.simulator-blocked p,
+.simulator-blocked ul
+{
+    margin: 0;
+}
+
+.simulator-blocked ul
+{
+    padding-inline-start: 20px;
+}
+
+.simulator-panes
+{
+    display: grid;
+    grid-template-columns:
+        minmax(var(--simulator-sequence-list-minimum-width), var(--simulator-sequence-list-width))
+        8px
+        minmax(var(--simulator-event-editor-minimum-width), var(--simulator-event-editor-width))
+        8px
+        minmax(360px, 1fr);
+    min-height: 0;
+}
+
+.simulator-sequence-list,
+.simulator-event-editor
+{
+    display: grid;
+    gap: 7px;
+    min-height: 0;
+}
+
+.simulator-sequence-list
+{
+    grid-template-rows: auto minmax(140px, 1fr) auto;
+    padding-inline-end: 12px;
+}
+
+.simulator-event-editor
+{
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    padding-inline: 12px;
+}
+
+/* The Buffer Position list and the Editor share the pane, divided by a splitter.
+
+   The default division is written here as two equal fractions rather than being measured and
+   stored, which is what
+   makes it exactly even and what keeps it even as the pane is resized.
+   --simulator-event-buffer-height is left unset
+   until the splitter is first dragged; from then on it carries the chosen height and the fallback
+   no longer applies. */
+
+.simulator-event-panes
+{
+    display: grid;
+    grid-template-rows:
+        minmax(var(--simulator-event-pane-minimum-height), var(--simulator-event-buffer-height, 1fr))
+        8px
+        minmax(var(--simulator-event-pane-minimum-height), 1fr);
+    min-height: 0;
+}
+
+.simulator-event-buffer,
+.simulator-event-text
+{
+    display: grid;
+    gap: 7px;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+}
+
+/* The two traces share the region, divided by a splitter.
+
+   The default division is written here as two equal fractions rather than being measured and
+   stored, which is what
+   makes it exactly even and what keeps it even as the region is resized.
+   --simulator-transition-trace-height is left
+   unset until the splitter is first dragged; from then on it carries the chosen height and the
+   fallback stops applying,
+   which is the same arrangement the Events pane uses. */
+
+.simulator-inspector
+{
+    display: grid;
+    grid-template-rows:
+        minmax(120px, var(--simulator-transition-trace-height, 1fr))
+        8px
+        minmax(120px, 1fr);
+    min-height: 0;
+    padding-inline-start: 12px;
+}
+
+/* Each trace is a heading above a scrolling region. The section itself must not scroll: the scroll
+/* belongs to the
+   region inside it, so that the heading stays put and the sticky column headers stay pinned to the
+   rows. */
+
+.simulator-transition-trace,
+.simulator-action-trace
+{
+    display: grid;
+    gap: 7px;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+    overflow: hidden;
+}
+
+.simulator-trace-scroll
+{
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.simulator-trace-empty
+{
+    margin: 0;
+}
+
+.simulator-workspace h2
+{
+    font-size: 13px;
+    margin: 0;
+}
+
+.simulator-workspace h3
+{
+    font-size: 12px;
+    margin: 0;
+}
+
+.simulator-sequence-list select
+{
+    inline-size: 100%;
+    min-height: 90px;
+}
+
+/* The list fills whatever half the splitter gives it. Its size attribute still describes how many
+/* rows it would
+   prefer, which is what keeps it sensible before the layout exists, but it no longer decides the
+   rendered height --
+   the splitter does, and a self-sizing control would fight it. */
+
+.simulator-event-list
+{
+    block-size: 100%;
+    inline-size: 100%;
+    min-height: 0;
+}
+
+.simulator-event-editor textarea
+{
+    block-size: 100%;
+    font-family: Consolas, "Courier New", monospace;
+    inline-size: 100%;
+    line-height: 1.45;
+    min-height: 0;
+    resize: none;
+}
+
+/* A fixed layout with no declared column widths divides the table evenly across its columns, which
+/* is what the
+   even-width requirement asks for and what keeps the two traces reading as one instrument.
+
+   Every row is exactly one --simulator-trace-row-height tall. That is a hard requirement rather
+   than a default: the
+   rows are windowed by scroll position, and windowing is only exact while every row is the same
+   height. It is also
+   why a long name is clipped rather than wrapped -- a wrapped name would take two rows' worth of
+   space and slide
+   every row below it out of the position the scroll arithmetic placed it in. The full value is on
+   the cell's title. */
+
+.simulator-trace-table
+{
+    table-layout: fixed;
+}
+
+.simulator-trace-table td
+{
+    block-size: var(--simulator-trace-row-height);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.simulator-trace-table thead th
+{
+    white-space: nowrap;
+}
+
+/* The spacers carry the height of the rows above and below the window. They hold no content, so
+/* their padding and
+   borders would otherwise add to the height the scroll arithmetic assumes. */
+
+.simulator-trace-spacer td
+{
+    block-size: auto;
+    border: 0;
+    padding: 0;
+}
+
+/* The outcome column already carries its own text, so these accents are a redundant cue rather than
+   the only one. */
+
+.simulator-trace-table tr[data-outcome="NO_TRANSITION"] td,
+.simulator-trace-table tr[data-outcome="UNKNOWN_EVENT"] td
+{
+    color: var(--status-warning);
+}
+
+.chart-command-panel,
+.simulator-command-panel
+{
+    border-top: 1px solid var(--border);
+}
+
+/* Narrow layouts stack the three regions rather than compressing five columns past legibility. */
+
+@media (max-width: 1100px)
+{
+    .simulator-panes
+    {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto auto;
+        overflow: auto;
+    }
+
+    /* Stacked panes have no shared height to divide, so each trace and each half of the Events pane
+    /* takes a fixed
+       readable band and scrolls inside it rather than inheriting the splitter's row template. */
+
+    .simulator-inspector
+    {
+        grid-template-rows: minmax(120px, 40vh) 8px minmax(120px, 40vh);
+    }
+
+    .simulator-event-panes
+    {
+        grid-template-rows: minmax(96px, 25vh) 8px minmax(96px, 25vh);
+    }
+
+    .simulator-panes > .splitter
+    {
+        display: none;
+    }
+
+    .simulator-sequence-list,
+    .simulator-event-editor,
+    .simulator-inspector
+    {
+        padding-inline: 0;
+    }
+}
+
+/* The Entry and Exit action lists align with their tab control's border. Scoped to the state
+/* association tabs; other
+   tab controls keep the shared inset. */
+
+.state-association-pane .tab-panel
+{
+    padding-inline: 0;
+}
+
+/* Action panel right alignment
+/* ------------------------------------------------------------------------------------
+   The last button's right edge lines up with the right edge of the content region above it, rather
+   than with the
+   page edge. Where the panel spans a page whose content carries the page inset, the panel's
+   trailing inset matches
+   that inset. Where the panel sits inside a pane or tab whose content is already flush, the
+   trailing inset is zero.
+   The Chart is the one page whose content reaches the page edge, so its panel keeps the standard
+   8-pixel inset. */
+
+.editor-list-page > .detail-button-panel,
+.editor-grid-page > .detail-button-panel,
+.editor-info-page > .detail-button-panel,
+.solver-sequence-workspace > .solver-page-command-bar,
+.simulator-workspace > .detail-button-panel
+{
+    padding-inline-end: 18px;
+}
+
+.states-list-pane > .detail-button-panel,
+.state-actions-pane > .detail-button-panel
+{
+    padding-inline-end: 0;
+}
+
+@media (max-width: 900px)
+{
+    .editor-list-page > .detail-button-panel,
+    .editor-grid-page > .detail-button-panel,
+    .editor-info-page > .detail-button-panel,
+    .solver-sequence-workspace > .solver-page-command-bar,
+    .simulator-workspace > .detail-button-panel
+    {
+        padding-inline-end: 11px;
+    }
+}
+
+@media (max-width: 520px)
+{
+    .page-setup-sections
+    {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.application-shell.print-chart-capture-shell
+{
+    display: block;
+    height: 900px;
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    width: 1200px;
+}
+
+/* Isolate the chart capture surface and define the paged print report. */
+
+.print-chart-capture-shell .chart-page
+{
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    height: 900px;
+    width: 1200px;
+}
+
+.print-chart-capture-shell .chart-palette,
+.print-chart-capture-shell .detail-button-panel
+{
+    display: none;
+}
+
+.print-chart-capture-shell .chart-canvas
+{
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.print-chart-capture-shell .chart-canvas *
+{
+    color: #000000 !important;
+}
+
+.print-chart-capture-shell .chart-canvas text,
+.print-chart-capture-shell .chart-canvas tspan
+{
+    fill: #000000 !important;
+}
+
+@media print
+{
+    :root
+    {
+        color-scheme: light;
+    }
+
+    html,
+    body,
+    #root
+    {
+        background: #ffffff !important;
+        color: #000000 !important;
+        height: auto !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+    }
+
+    .application-shell
+    {
+        display: none !important;
+    }
+
+    .application-shell.print-chart-capture-shell
+    {
+        display: block !important;
+    }
+
+    .print-report
+    {
+        background: #ffffff;
+        color: #000000;
+        display: block;
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-size: 8pt;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+        print-color-adjust: economy;
+    }
+
+    .print-report[data-print-style="academic"]
+    {
+        font-family: "Times New Roman", Times, serif;
+    }
+
+    .print-report-header
+    {
+        border-bottom: 2px solid #000000;
+        margin-bottom: 7mm;
+        padding-bottom: 3mm;
+        text-align: left;
+    }
+
+    .print-report-header h1
+    {
+        font-size: 14pt;
+        line-height: 1.15;
+        margin: 0;
+    }
+
+    .print-report dl
+    {
+        display: grid;
+        gap: 1mm 5mm;
+        grid-template-columns: max-content minmax(0, 1fr);
+        margin: 3mm 0 0;
+        text-align: left;
+    }
+
+    .print-report dl > div
+    {
+        display: contents;
+    }
+
+    .print-report dt
+    {
+        font-weight: 700;
+    }
+
+    .print-report dd
+    {
+        font-weight: 400;
+        margin: 0;
+    }
+
+    .print-report-section
+    {
+        margin-top: 6mm;
+    }
+
+    .print-report-section + .print-report-section
+    {
+        break-before: page;
+        page-break-before: always;
+    }
+
+    .print-report h2,
+    .print-report h3
+    {
+        break-after: avoid-page;
+        color: #000000;
+        page-break-after: avoid;
+    }
+
+    .print-report h2
+    {
+        border-bottom: 1px solid #000000;
+        font-size: 11pt;
+        margin: 0;
+        padding-bottom: 1mm;
+    }
+
+    .print-report h3
+    {
+        font-size: 9pt;
+        margin: 4mm 0 0;
+    }
+
+    .print-report-table
+    {
+        border-collapse: collapse;
+        margin-top: 3.8mm;
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .print-report-table thead
+    {
+        display: table-header-group;
+    }
+
+    .print-report-table tr
+    {
+        break-inside: avoid-page;
+        page-break-inside: avoid;
+    }
+
+    .print-report-table th,
+    .print-report-table td
+    {
+        color: #000000;
+        font-size: 7pt;
+        padding: 1.2mm;
+        text-align: left;
+        vertical-align: top;
+    }
+
+    .print-report-table thead th
+    {
+        font-weight: 700;
+    }
+
+    .print-report[data-print-style="academic"] .print-report-table
+    {
+        border-bottom: 1.5px solid #000000;
+        border-top: 1.5px solid #000000;
+    }
+
+    .print-report[data-print-style="academic"] .print-report-table th,
+    .print-report[data-print-style="academic"] .print-report-table td
+    {
+        background: #ffffff;
+        border: 0;
+    }
+
+    .print-report[data-print-style="academic"] .print-report-table thead th
+    {
+        border-bottom: 1px solid #000000;
+    }
+
+    .print-report[data-print-style="industry"] .print-report-table th,
+    .print-report[data-print-style="industry"] .print-report-table td
+    {
+        background: #ffffff;
+        border: 1px solid #000000;
+    }
+
+    .print-report[data-print-style="industry"] .print-report-table thead th
+    {
+        background: #cccccc;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .print-table-list
+    {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .print-table-list li
+    {
+        margin: 0;
+        padding: 0;
+    }
+
+    .print-state-chart-section
+    {
+        break-before: page;
+        break-inside: avoid-page;
+        page-break-before: always;
+        page-break-inside: avoid;
+    }
+
+    .print-state-chart-frame
+    {
+        align-items: center;
+        display: flex;
+        height: var(--print-state-chart-height);
+        justify-content: center;
+        margin-top: 3.8mm;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .print-state-chart-image
+    {
+        display: block;
+        height: 100%;
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        width: 100%;
+    }
+}

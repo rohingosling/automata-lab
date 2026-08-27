@@ -1,0 +1,26 @@
+{
+  "name": "automata-lab-documentation",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "24.15.0",
+    "npm": "11.12.1"
+  },
+  "scripts": {
+    "prebuild": "npm run audit:dependencies",
+    "prebuild:combined": "npm run audit:dependencies",
+    "audit:dependencies": "node scripts/audit-documentation-dependencies.mjs",
+    "audit:dependencies:write": "node scripts/audit-documentation-dependencies.mjs --write",
+    "dev": "node scripts/run-vitepress.mjs dev . --host 127.0.0.1 --strictPort",
+    "build": "node scripts/run-vitepress.mjs build . && node scripts/harden-documentation.mjs",
+    "build:combined": "node scripts/run-vitepress.mjs build . --outDir ../automata-web/dist/docs && node scripts/harden-documentation.mjs ../automata-web/dist/docs",
+    "test": "npm run build && node scripts/verify-documentation.mjs",
+    "test:combined": "node scripts/verify-documentation.mjs ../automata-web/dist/docs",
+    "preview": "node scripts/run-vitepress.mjs preview . --host 127.0.0.1 --strictPort"
+  },
+  "devDependencies": {
+    "vitepress": "1.6.4"
+  }
+}
