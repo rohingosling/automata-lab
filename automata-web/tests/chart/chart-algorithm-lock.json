@@ -1,0 +1,24 @@
+{
+    "description": "Content digests of the locked chart automatic-layout and transition-routing sources. Regenerate only with npm run chart:lock, and only when the change is deliberate.",
+    "authority": "docs/chart-layout-routing.md section 14",
+    "baseline": {
+        "commit": "5b71760",
+        "acceptedOn": "2026-08-20",
+        "summary": "Chart automatic layout and transition routing accepted and locked; every governing document reconciled to the implemented code."
+    },
+    "files": {
+        "src/application/chart-layout-limits.ts": "sha256:cf50e6554a6a797a5981f3fb82e113d02f1ef848c80064761ec983b17294a74e",
+        "src/application/chart-routing-backbone.ts": "sha256:4b78340e333de317af0d93f7db9fc16af7e770c1c75962bbcc844adbaf0a8fcf",
+        "src/application/chart-routing-performance.ts": "sha256:0e14b6b186d5b8883ca93c099f3415ceb57db4a5af89a89621a6586e5d863c44",
+        "src/application/chart-routing-spatial-index.ts": "sha256:ddc74e5839efdb61a9a3c5f6e7d4e447ab1784bd3f1c94536487422fd2a6c03b",
+        "src/application/chart-self-transition-loops.ts": "sha256:a7cf6bb7afc3ed89534d1ab008243291e8c785f0e1d6ca0a17053606a34a7cfe",
+        "src/infrastructure/chart/browser-chart-layout-port.ts": "sha256:9e308e549ee80cad28bcc48b8f21337f188c396a59587e0298ed65767e5346bf",
+        "src/infrastructure/chart/browser-chart-routing-port.ts": "sha256:7923c912b2742413db5d193a999712e780d9b2dd05fb824c52ac87262bd3bbbb",
+        "src/infrastructure/chart/chart-routing-reuse-cache.ts": "sha256:de994f9bda01ad564dc5afccf14f24c5fe921328d8ddd40559552ad91ede894d",
+        "src/infrastructure/chart/chart-routing-visibility-graph.ts": "sha256:7e079f3de0dca8c8bc9f700126ef980b845653a2e46e4a0ac6dd466517749842",
+        "src/infrastructure/chart/elk-chart-layout.ts": "sha256:059cea281d3e2b3a906c2262ffec30ea1ae4f5953937df2c457b47da5acf4341",
+        "src/infrastructure/chart/orthogonal-chart-router.ts": "sha256:c8c266b93f96935d4adc3829ca2b6a4d10974b018e20d5a46fb203474447bcde",
+        "src/protocol/chart-routing-worker-protocol.ts": "sha256:430522529f255e71a8de2e2f4dafd6a8b88f2b124a29c50dbfb4d0c41079cd86",
+        "src/workers/chart-routing.worker.ts": "sha256:e5c7b15f2819b2deb09821ae63f9c0bcf8d9facb9394eda04156b7994824e227"
+    }
+}

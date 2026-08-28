@@ -1,0 +1,13 @@
+Automata Lab 1.1.0
+Editor catalog improvements
+
+Highlights
+
+- View Name and Description columns together in the States, Events, and Actions catalogs.
+- Use one consistent accessible table style and keyboard model across all three catalogs.
+- Start the States page with 60 percent of its width for the state catalog and 40 percent for the Entry Actions and Exit Actions tabs.
+- Keep the Entry Actions and Exit Actions lists compact, showing action names in assignment order.
+
+Known issue
+
+- Opera may not render the Light theme correctly. Use Dark theme, Chrome, or Microsoft Edge until this is corrected.

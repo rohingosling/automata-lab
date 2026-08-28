@@ -1,0 +1,113 @@
+{
+  "file_id": "automata-lab-state-machine",
+  "file_version": "1.0.0",
+  "settings": {
+    "name": "state_machine_solver_candidate",
+    "description": "Serialization fixture for a replay-verified entry-action-only Solver candidate.",
+    "version": "1.0.0"
+  },
+  "state_machine": {
+    "initial_state": "state_generated_0001",
+    "events": [
+      {
+        "name": "event_open",
+        "description": "Observed open event."
+      },
+      {
+        "name": "event_close",
+        "description": "Observed close event."
+      }
+    ],
+    "states": [
+      {
+        "name": "state_generated_0001",
+        "description": "Generated initial state."
+      },
+      {
+        "name": "state_open",
+        "description": "Explicitly observed open state."
+      },
+      {
+        "name": "state_closed",
+        "description": "Explicitly observed closed state."
+      }
+    ],
+    "actions": [
+      {
+        "name": "action_opened",
+        "description": "Observed open-state entry output."
+      },
+      {
+        "name": "action_closed",
+        "description": "Observed closed-state entry output."
+      }
+    ],
+    "state_actions": {
+      "entry": [
+        {
+          "state": "state_open",
+          "action": "action_opened"
+        },
+        {
+          "state": "state_closed",
+          "action": "action_closed"
+        }
+      ],
+      "exit": []
+    },
+    "transition_table": [
+      {
+        "state": "state_generated_0001",
+        "event": "event_open",
+        "state_next": "state_open"
+      },
+      {
+        "state": "state_open",
+        "event": "event_close",
+        "state_next": "state_closed"
+      }
+    ]
+  },
+  "chart": {
+    "settings": {
+      "expand_states": true,
+      "state_origin_centered": false
+    },
+    "indicators": {
+      "initial_state_indicator": null,
+      "terminal_state_indicators": [],
+      "terminal_state_transitions": []
+    },
+    "states": [],
+    "draft_transitions": []
+  },
+  "solver": {
+    "sequences": [
+      {
+        "name": "observed_open_close",
+        "description": "Evidence replayed before candidate serialization.",
+        "start_context": "initial",
+        "sequence": [
+          "event_open",
+          "state_open",
+          "action_opened",
+          "event_close",
+          "action_closed",
+          "state_closed"
+        ]
+      }
+    ]
+  },
+  "simulator": {
+    "sequences": [
+      {
+        "name": "candidate_replay",
+        "description": "Replay the observed candidate path.",
+        "sequence": [
+          "event_open",
+          "event_close"
+        ]
+      }
+    ]
+  }
+}

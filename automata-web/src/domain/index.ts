@@ -1,0 +1,16 @@
+// /////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Name:    Domain Public Surface
+// Version: 1.0.0
+// Date:    2026-08-09
+// Author:  Rohin Gosling
+//
+// Description:
+//
+//   Exposes the pure model, command, validation, runtime, and Solver-observation foundations.
+//
+// /////////////////////////////////////////////////////////////////////////////////////////////////
+
+export * from "./model/index.js";
+export * from "./runtime/index.js";
+export * from "./solver/index.js";
