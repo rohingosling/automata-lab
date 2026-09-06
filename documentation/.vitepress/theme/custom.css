@@ -1,0 +1,23 @@
+/*
+ * Automata Lab documentation theme adjustments.
+ */
+
+.VPHomeFeatures + .vp-doc
+{
+    margin-top: 24px;
+}
+:root
+{
+    --vp-c-brand-1:           #4059ad;
+    --vp-c-brand-2:           #344a94;
+    --vp-button-brand-bg:     #4059ad;
+    --vp-button-brand-hover-bg: #344a94;
+}
+
+.dark
+{
+    --vp-c-brand-1:           #aebcff;
+    --vp-c-brand-2:           #c2ccff;
+    --vp-button-brand-bg:     #4059ad;
+    --vp-button-brand-hover-bg: #344a94;
+}

@@ -1,0 +1,118 @@
+Automata Lab 1.2.0
+Released 7 September 2026
+Chart authoring and application appearance
+
+Appearance and layout
+
+- Wrap release notes at 79 characters with 79-character release separators.
+  Widen About to show 80 monospace characters without horizontal scrolling on
+  desktop while fitting smaller screens.
+
+- Use black outlines, text, transitions, indicators, and grip outlines in Light
+  charts while preserving light interiors and gray state-selection halos. Give
+  state height resize grips 2-pixel borders in both themes, matching state
+  borders.
+
+- Choose Blue, Gray, Green, Teal, Purple, Red, Orange, Yellow, Black, or White
+  independently for Title Bar Color, Application Buttons, and Console Message
+  Buttons in Application Settings -> Appearance -> Application Colors.
+- Default application buttons to Blue with 1-pixel black borders. Use slightly
+  darker, muted pastel button colors, except for lighter theme-specific Gray.
+  The retained manual Console color defaults to Gray; Console title-bar Clear
+  uses the application color.
+- Enable Match Console Message Color by default for first-time users,
+  preserving existing saved choices. Enabling it uses the shared Green message,
+  Blue warning, and Red error palettes, including darker hover and pressed
+  shades, in both themes and disables the Console color dropdown while
+  retaining its selection. Unchecking restores that color.
+- Keep menu items, settings group and other list items, tab-page tabs,
+  Transition Table dropdown controls, and Chart Palette tiles independent of
+  button colors. System colors take precedence in forced-colors mode.
+- Use white text on Dark-mode Console inline buttons, with a subtle dark text
+  edge on manually selected Yellow/White fills for readability. Matched
+  severity buttons use white text and icons without a shadow.
+- Add Title Bar Color, default Blue, for the main application and every modal
+  title bar, with darker palette shades in Dark mode and readable title text.
+- Remove the master Model tree close button and retire its saved hidden state,
+  restoring navigation and the Editor workspace while retaining responsive
+  region switching.
+- Distinguish active tab pages with a slightly lighter tab in either theme.
+- Reduce panel and modal close controls by 20 percent to 24 by 22.4 CSS pixels,
+  right-aligned with equal top, right, and bottom insets. Transition Table
+  dropdown controls match panel close-control sizing and margins.
+- Allocate one third of the combined Name/Description width to Name and two
+  thirds to Description in States, Events, and Actions; preserve the
+  independent States page splitter.
+- Add a Palette title bar matching the State Chart header height and color.
+- Keep the Chart Palette vertical beside the Canvas and size it to its longest
+  unwrapped icon label plus 4 pixels on each side. Restore its original theme
+  appearance.
+
+Chart authoring
+
+- Restore keyboard focus after routed Chart elements finish rendering.
+- Use circular transition endpoint grips matching the state fill independently
+  of button colors, 4-pixel outer gray state-selection halos that use lighter
+  gray in Light and darker gray in Dark while preserving normal state borders,
+  and doubled 6-pixel selected-transition strokes that retain their normal line
+  color in Light mode.
+- Remove horizontal resize lines and enlarge selected-state grips by 4 pixels
+  in each dimension. Mirror the top grip above the state while retaining the
+  bottom position.
+
+- Create a self-transition by selecting a state and Shift-selecting it again,
+  including with Shift+Enter.
+- Attach draft transition endpoints in either order, including to the same
+  state. The second attachment opens configuration; Cancel keeps both
+  connections.
+- Keep attached endpoints connected as states move or resize. Save/Open and
+  Undo/Redo preserve unfinished connections.
+- Detach an existing transition into free space while retaining its event and
+  remaining connection. Reconnect it to restore the transition automatically;
+  conflicting connections leave the previous model and draft unchanged.
+- Use the same routing, boundary grips, parallel lanes, and self-loop geometry
+  for drafts and configured transitions. Selected drafts use a thicker curve
+  without a rectangular selection border.
+- Drag smooth 32-pixel Palette glyphs with matching icon-only feedback.
+- Preserve pan and zoom during editing, Palette placement, and navigation away
+  from and back to Chart. Fit once on the first Chart visit after Open or
+  Server Pull; Automatic Layout and Fit Chart also fit explicitly. New empty
+  files start at 100 percent.
+- Default to a 50-pixel grid, 300-by-100 collapsed states, and 300-pixel
+  expanded width with a 100-pixel minimum height. Existing valid saved
+  preferences remain in effect.
+
+Files and output
+
+- Read strict file formats 1.0.0, 1.1.0, and 1.2.0. Save uses the minimum
+  version required by draft attachments or remembered events.
+- Include retained draft state names and events in Chart Projection reports,
+  and use the document's required file version in print metadata.
+
+Known limitations
+
+- Endpoint jumping during obstacle routing remains under investigation.
+- Dense charts can still take longer to route.
+- Opera may not render the Light theme correctly. Use Dark theme, Chrome, or
+  Microsoft Edge until this is corrected.
+
+-------------------------------------------------------------------------------
+
+Automata Lab 1.1.0
+Editor catalog improvements
+
+Highlights
+
+- View Name and Description columns together in the States, Events, and Actions
+  catalogs.
+- Use one consistent accessible table style and keyboard model across all three
+  catalogs.
+- Start the States page with 60 percent of its width for the state catalog and
+  40 percent for the Entry Actions and Exit Actions tabs.
+- Keep the Entry Actions and Exit Actions lists compact, showing action names
+  in assignment order.
+
+Known issue
+
+- Opera may not render the Light theme correctly. Use Dark theme, Chrome, or
+  Microsoft Edge until this is corrected.

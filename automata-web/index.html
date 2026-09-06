@@ -1,0 +1,35 @@
+<!doctype html>
+
+<!--
+    Document: index.html
+
+    Defines the static application host, security policy, icon, and module entry point.
+-->
+
+<html lang="en">
+    <!-- Initialize document metadata, security policy, and application identity. -->
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' ws://127.0.0.1:* ws://localhost:*; worker-src 'self' blob:; media-src 'self' blob:; manifest-src 'self'; form-action 'none'"
+        />
+        <meta name="color-scheme" content="light dark" />
+        <meta name="description" content="Automata Lab state-machine modeling laboratory" />
+        <link
+            href="%BASE_URL%icons/custom/20/state-machine-application.png"
+            rel="icon"
+            sizes="20x20"
+            type="image/png"
+        />
+        <title>Automata Lab</title>
+    </head>
+    <!-- Mount the application and load its module entry point. -->
+
+    <body>
+        <div id="root"></div>
+        <script type="module" src="/src/main.tsx"></script>
+    </body>
+</html>
