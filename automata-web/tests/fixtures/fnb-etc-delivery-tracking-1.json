@@ -1,0 +1,858 @@
+{
+  "file_id": "automata-lab-state-machine",
+  "file_version": "1.0.0",
+  "settings": {
+    "name": "logistics_experiment_1",
+    "description": "Experiment to see what the FNB ETC logistics platform state machine looks like, in the format of a standard More Machine state transducer.",
+    "version": "1.0.0"
+  },
+  "state_machine": {
+    "initial_state": "STATE_TRANSPORT_REQUEST_RECEIVED",
+    "events": [
+      {
+        "name": "EVENT_001_DELIVERED_CLIENT",
+        "description": "The client has received their bank card."
+      },
+      {
+        "name": "EVENT_002_CHECKED_IN_HUB",
+        "description": "The bank card has been checked into the delivery HUB."
+      },
+      {
+        "name": "EVENT_004_APPOINTMENT_SCHEDULED",
+        "description": "An appointment has been scheduled for the delivery or collection of the bank card."
+      },
+      {
+        "name": "EVENT_006_DELIVERY_FAILED",
+        "description": "Attempted delivery of the bank card was unsuccessful."
+      },
+      {
+        "name": "EVENT_014_SCAN_INTO_COURIER_HUB",
+        "description": "The bank card has been scanned into the courier's HUB."
+      },
+      {
+        "name": "EVENT_015_AWAITING_DELIVERY_INSTRUCTION_REQUEST_CONTACT_INFO",
+        "description": "The system is awaiting further instructions for delivery and needs the contact information of the receiver."
+      },
+      {
+        "name": "EVENT_016_DELIVERED_BRANCH",
+        "description": "The bank card has been delivered to a branch."
+      },
+      {
+        "name": "EVENT_022_CHECKED_OUT_SELBY",
+        "description": "The item has been checked out at Selby."
+      },
+      {
+        "name": "EVENT_025_COURIER_SCAN_IN_AND_DESTROY",
+        "description": "The courier has scanned in the item and is awaiting instructions to destroy it."
+      },
+      {
+        "name": "EVENT_026_DESTROYED",
+        "description": "The item has been destroyed - usually followed by Courier scan in and destroy."
+      },
+      {
+        "name": "EVENT_032_CHECKED_IN_DHUB",
+        "description": "Item has been checked into the DHUB."
+      },
+      {
+        "name": "EVENT_033_CONTACT_ATTEMPTS_EXCEEDED",
+        "description": "The limit for attempting to contact the receiver has been exceeded."
+      },
+      {
+        "name": "EVENT_035_DELIVERED_COMPANY",
+        "description": "The bank card has been delivered to a company."
+      },
+      {
+        "name": "EVENT_042_CHECKED_OUT_MHUB",
+        "description": "The bank card has been checked out from MHUB."
+      },
+      {
+        "name": "EVENT_043_CHECKED_OUT_DHUB",
+        "description": "The bank card has been checked out from DHUB."
+      },
+      {
+        "name": "EVENT_049_DELIVERED_3RD_PARTY",
+        "description": "The bank card has been delivered to a third-party location."
+      },
+      {
+        "name": "EVENT_050_DELIVERED_KNOCKNDROP",
+        "description": "The bank card has been delivered via the knockndrop delivery method."
+      },
+      {
+        "name": "EVENT_051_CUSTOMER_CONTACT_SUCCESSFUL_TEL",
+        "description": "Successful telephone communication with the customer was established."
+      },
+      {
+        "name": "EVENT_052_CUSTOMER_CONTACT_UNSUCCESSFUL_TEL",
+        "description": "Failed to establish telephone communication with the customer."
+      },
+      {
+        "name": "EVENT_060_CUSTOMER_CONTACT_UNSUCCESSFUL_TEL_ATTEMPT1",
+        "description": "First telephone communication attempt with the customer was unsuccessful."
+      },
+      {
+        "name": "EVENT_061_CUSTOMER_CONTACT_UNSUCCESSFUL_TEL_ATTEMPT2",
+        "description": "Second telephone communication attempt with the customer has failed."
+      },
+      {
+        "name": "EVENT_062_CUSTOMER_CONTACT_UNSUCCESSFUL_TEL_ATTEMPT3",
+        "description": "Failed to establish contact with the customer on the third telephone communication attempt."
+      },
+      {
+        "name": "EVENT_063_AWAITING_FNB_NUMBER_INVALID",
+        "description": "The system is waiting for an update. The current FNB number associated with the delivery is invalid."
+      },
+      {
+        "name": "EVENT_064_AWAITING_FNB_NUMBER_INCORRECT",
+        "description": "The system is on hold. The FNB number on file is incorrect."
+      },
+      {
+        "name": "EVENT_065_AWAITING_FNB_CONTACT_ATTEMPTS_EXCEEDED",
+        "description": "The system is waiting for instructions as attempts to contact FNB were unsuccessful."
+      },
+      {
+        "name": "EVENT_066_AWAITING_FNB_CANCEL_CARD",
+        "description": "System is on hold until confirmation is received for FNB card cancellation."
+      },
+      {
+        "name": "EVENT_067_AWAITING_FNB_REFUSED_SECURITY_CHECK",
+        "description": "The system is waiting for updates as the FNB refused the security check."
+      },
+      {
+        "name": "EVENT_068_AWAITING_FNB_COMPANY_REPRESENTATIVE_UNAVAILABLE",
+        "description": "The company rep from FNB is unavailable and the system is waiting."
+      },
+      {
+        "name": "EVENT_069_AWAITING_FNB_DELIVERY_ATTEMPTS_EXCEEDED",
+        "description": "The attempts to deliver the FNB item have exceeded and it's on hold."
+      },
+      {
+        "name": "EVENT_070_AWAITING_FNB_COMPANY_ADDRESS_INVALID",
+        "description": "FNB's company address is invalid and the system needs an update."
+      },
+      {
+        "name": "EVENT_071_AWAITING_FNB_DN_KYC_DOCUMENTS",
+        "description": "Awaiting on FNB to down validate KYC documents."
+      },
+      {
+        "name": "EVENT_072_AWAITING_FNB_NO_AUTHORISED_RECIPIENT",
+        "description": "There is no authorized recipient at FNB and the system is waiting."
+      },
+      {
+        "name": "EVENT_073_AWAITING_FNB_CLIENT_UNAVALIABLE",
+        "description": "The client from FNB is unavailable and the system is on hold."
+      },
+      {
+        "name": "EVENT_074_AWAITING_FNB_NEW_CONTACT_INFO",
+        "description": "The system is waiting for new contact info from FNB."
+      },
+      {
+        "name": "EVENT_082_DELIVERY_FAILED_CUSTOMER_MISSED_APPOINTMENT",
+        "description": "The delivery failed because the customer missed the appointment."
+      },
+      {
+        "name": "EVENT_083_DELIVERY_FAILED_COURIER_MISSED_APPOINTMENT",
+        "description": "The delivery attempt failed because the courier missed the appointment."
+      },
+      {
+        "name": "EVENT_088_AWAITING_FNB_REFUSED_SECURITY_CHECK",
+        "description": "FNB has rejected the security check for this package."
+      },
+      {
+        "name": "EVENT_092_AWAITING_FNB_NUMBER_INCORRECT",
+        "description": "The system is waiting. The associated FNB number is incorrect."
+      },
+      {
+        "name": "EVENT_092_NO_ID_DOCUMENT_NO_KYC_ID_COCUMENT",
+        "description": "There is neither an ID document nor a KYC ID document available."
+      },
+      {
+        "name": "EVENT_099_AWAITING_FEEDBACK_SUPPLIER",
+        "description": "The system is waiting for feedback from the supplier."
+      },
+      {
+        "name": "EVENT_108_DAY_BEFORE_DELIVERY",
+        "description": "This milestone is for the day before the planned delivery."
+      },
+      {
+        "name": "EVENT_109_ON_THE_DAY_OF_DELIVERY",
+        "description": "This milestone marks the day of actual delivery."
+      },
+      {
+        "name": "EVENT_ETC_TRANSPORT_REQUEST_RECEIVED_REGULAR",
+        "description": "The \"IDENTIFY_TRANSPORT_REQUEST_TYPE\" action identifies the type of transport request received, and raises the apropriate internal milestone, either \"CARD_ETC_TRANSPORT_REQUEST_RECEIVED_REGULAR\" or \"CARD_ETC_TRANSPORT_REQUEST_RECEIVED_RENEWAL\"."
+      },
+      {
+        "name": "EVENT_ETC_TRANSPORT_REQUEST_RECEIVED_RENEWAL",
+        "description": "The \"IDENTIFY_TRANSPORT_REQUEST_TYPE\" action identifies the type of transport request received, and raises the apropriate internal milestone, either \"CARD_ETC_TRANSPORT_REQUEST_RECEIVED_REGULAR\" or \"CARD_ETC_TRANSPORT_REQUEST_RECEIVED_RENEWAL\"."
+      },
+      {
+        "name": "EVENT_ETC_DAILY_DELIVERY_RECEIVED",
+        "description": "A daily delivery has been received by the ETC system."
+      },
+      {
+        "name": "EVENT_ETC_RENEWAL_DELIVERY_RECEIVED",
+        "description": "A renewal delivery was received by the ETC system."
+      },
+      {
+        "name": "EVENT_ETC_CUSTOMER_DID_NOT_SETUP_DELIVERY",
+        "description": "The customer did not setup a delivery yet."
+      },
+      {
+        "name": "EVENT_ETC_CUSTOMER_SETUP_DELIVERY",
+        "description": "The customer has setup a delivery."
+      }
+    ],
+    "states": [
+      {
+        "name": "STATE_TRANSPORT_REQUEST_RECEIVED",
+        "description": "A transport request has been received, either via GTR, or legacy t-pipe."
+      },
+      {
+        "name": "STATE_TRANSPORT_REQUEST_RECEIVED_REGULAR",
+        "description": "An action triggered when entering the \"CARD_TRANSPORT_REQUEST_RECEIVED\" raises an internal milestone to transition to a regular or renewal specific delivery request received states. "
+      },
+      {
+        "name": "STATE_TRANSPORT_REQUEST_RECEIVED_RENEWAL",
+        "description": "An action triggered when entering the \"CARD_TRANSPORT_REQUEST_RECEIVED\" raises an internal milestone to transition to a regular or renewal specific delivery request received states. "
+      },
+      {
+        "name": "STATE_CUSTOMER_HAS_SETUP_DELIVERY",
+        "description": "The customer has set up their delivery."
+      },
+      {
+        "name": "STATE_CUSTOMER_HAS_NOT_SETUP_DELIVERY",
+        "description": "The customer has not yet set up their delivery."
+      },
+      {
+        "name": "STATE_DELIVERY_SETUP",
+        "description": "The customer can set up their delivery."
+      },
+      {
+        "name": "STATE_ORDER_COLLECTED_FROM_MANUFACTURER_DAILY",
+        "description": "A daily order has been collected from the manufacturer. "
+      },
+      {
+        "name": "STATE_ORDER_COLLECTED_FROM_MANUFACTURER_RENEWAL",
+        "description": "A product renewal has been collected from the manufacturer. "
+      },
+      {
+        "name": "STATE_DELIVERY_SCHEDULED",
+        "description": "Card delivery scheduled."
+      },
+      {
+        "name": "STATE_CUSTOMER_CONTACT_FAILED_ATTEMPT_1",
+        "description": "Attempt to contact a customer to arrange delivery or collection, has failed for the 1st time."
+      },
+      {
+        "name": "STATE_CUSTOMER_CONTACT_FAILED_ATTEMPT_2",
+        "description": "Attempt to contact a customer to arrange delivery or collection, has failed for the 2nd time."
+      },
+      {
+        "name": "STATE_DAY_BEFORE_DELIVERY",
+        "description": "It is they day before delivery or collection is scheduled to occur. "
+      },
+      {
+        "name": "STATE_DAY_OF_DELIVERY",
+        "description": "It is they day that delivery or collection is scheduled to occur. "
+      },
+      {
+        "name": "STATE_DELIVERED",
+        "description": "A card has been successfully delivered. "
+      },
+      {
+        "name": "STATE_MISSED_APPOINTMENT_CUSTOMER",
+        "description": "The customer missed a delivery or collection appointment."
+      },
+      {
+        "name": "STATE_MISSED_APPOINTMENT_COURIER",
+        "description": "The courier missed a delivery or collection appointment. "
+      },
+      {
+        "name": "STATE_DELIVERY_UNSUCCESSFUL",
+        "description": "Delivery unsuccessful."
+      }
+    ],
+    "actions": [
+      {
+        "name": "ACTION_SYSTEM_SEND_COURIER_FILE",
+        "description": "The ETC system generates and sends a courier instruction (courier file) to the courier. "
+      },
+      {
+        "name": "ACTION_API_SCHEDULE_DELIVERY",
+        "description": "Call the courier's shceulde delivery API."
+      },
+      {
+        "name": "ACTION_MESSAGE_ORDER_PLACED",
+        "description": "Send a push notification or SMS (depending on whether the customer is on platform or not), to notify them that their order has been placed."
+      },
+      {
+        "name": "ACTION_MESSAGE_ORDER_COLLECTED_BY_COURIER",
+        "description": "Send a push notification or SMS to the customer, to notify them that their order has been collected by a courier."
+      },
+      {
+        "name": "ACTION_MESSAGE_SETUP_DELIVERY_NOW",
+        "description": "Send a push notification with a setup delivery now link in it, so that the customer can choose to go seup their delivery."
+      },
+      {
+        "name": "ACTION_MESSAGE_ORDER_SCHEDULED",
+        "description": "Send a push notification or SMS to the customer, to notify them that their delivery has been scheduled."
+      },
+      {
+        "name": "ACTION_MESSAGE_DAY_BEFORE_DELIVERY",
+        "description": "Send a push notification or SMS to the customer, to notify them that their delivery is scheduled for tomorrow. "
+      },
+      {
+        "name": "ACTION_MESSAGE_DAY_OF_DELIVERY",
+        "description": "Send a push notification or SMS to the customer, to notify them that their delivery is cheduled for today."
+      },
+      {
+        "name": "ACTION_MESSAGE_ORDER_DELIVERED",
+        "description": "Send a push notification or SMS to the customer, to notify them that their order has been fulfilled."
+      },
+      {
+        "name": "ACTION_MESSAGE_DELIVERY_UNSUCCESSFUL",
+        "description": "Send a push notification or SMS to the customer, to notify them that their order could not be fulfilled. "
+      },
+      {
+        "name": "ACTION_MESSAGE_CUSTOMER_CONTACT_FAILED_1",
+        "description": "The first attempt to contact the customer failed. "
+      },
+      {
+        "name": "ACTION_MESSAGE_CUSTOMER_CONTACT_FAILED_2",
+        "description": "The second attempt to contact the customer failed. "
+      },
+      {
+        "name": "ACTION_MESSAGE_MISSED_APPOINTMENT_CUSTOMER",
+        "description": "Send a push notification or SMS to notify the customer that they missed the delivery or collection appointment. "
+      },
+      {
+        "name": "ACTION_MESSAGE_MISSED_APPOINTMENT_COURIER",
+        "description": "Send a push notification or SMS to notify the customer that the courier missed the delivery or collection appointment. "
+      },
+      {
+        "name": "ACTION_TRACKING_SCREEN_INITIATE",
+        "description": "This is the first action used to initiate the tracking screen to SmartWorX."
+      },
+      {
+        "name": "ACTION_TRACKING_SCREEN_ORDER_PLACED",
+        "description": "Update the App tracking screen, to show the customer that their screen order has been placed."
+      },
+      {
+        "name": "ACTION_TRACKING_SCREEN_ORDER_COLLECTED_BY_COURIER",
+        "description": "Update the App tracking screen, to show the customer that their screen order has been collected by a courier."
+      },
+      {
+        "name": "ACTION_TRACKING_ORDER_SCHEDULED",
+        "description": "Update the App tracking screen, to show that an order has been scheduled. "
+      },
+      {
+        "name": "ACTION_TRACKING_SCREEN_DAY_BEFORE_DELIVERY",
+        "description": "Update the App tracking screen, to show the customer that their delivery is scheduled for tomorrow. "
+      },
+      {
+        "name": "ACTION_TRACKING_SCREEN_DAY_OF_DELIVERY",
+        "description": "Update the App tracking screen, to show the customer that their delivery is scheduled for today."
+      },
+      {
+        "name": "ACTION_TRACKING_SCREEN_ORDER_DELIVERED",
+        "description": "Update the App tracking screen, to show the customer that their appointment has been mised, either by them, or the courier. The last milestone triggering the state that triggers this action, can be used to determine the appointment was missed by the courier or the customer. "
+      },
+      {
+        "name": "ACTION_TRACKING_SCREEN_COMPLETE",
+        "description": "This action is used to close the tracker after a delivery has completed. The same action is used fro both successful delivery and unssucessful delivery. "
+      },
+      {
+        "name": "ACTION_TRACKING_SCREEN_UNSUCCESSFUL",
+        "description": "Update the tracking screen to notify the customer that the delivery was unsuccessful."
+      },
+      {
+        "name": "ACTION_TRACKING_SCREEN_CONTACT_FAILED_1",
+        "description": "Update the App trcking screen to notify the customer of the first customer contact attempt failure. "
+      },
+      {
+        "name": "ACTION_TRACKING_SCREEN_CONTACT_FAILED_2",
+        "description": "Update the App trcking screen to notify the customer of the second customer contact attempt failure. "
+      },
+      {
+        "name": "ACTION_TRACKING_SCREEN_MISSED_APPOINTMENT_CUSTOMER",
+        "description": "Update the App tracking screen to notify the customer that they missed the delivery or collection appointment."
+      },
+      {
+        "name": "ACTION_TRACKING_SCREEN_MISSED_APPOINTMENT_COURIER",
+        "description": "Update the App tracking screen to notify the customer that the courier missed the delivery or collection appointment. "
+      }
+    ],
+    "state_actions": {
+      "entry": [
+        {
+          "state": "STATE_CUSTOMER_HAS_NOT_SETUP_DELIVERY",
+          "action": "ACTION_MESSAGE_ORDER_SCHEDULED"
+        },
+        {
+          "state": "STATE_CUSTOMER_HAS_NOT_SETUP_DELIVERY",
+          "action": "ACTION_TRACKING_ORDER_SCHEDULED"
+        },
+        {
+          "state": "STATE_CUSTOMER_HAS_SETUP_DELIVERY",
+          "action": "ACTION_API_SCHEDULE_DELIVERY"
+        },
+        {
+          "state": "STATE_CUSTOMER_HAS_SETUP_DELIVERY",
+          "action": "ACTION_TRACKING_ORDER_SCHEDULED"
+        },
+        {
+          "state": "STATE_DAY_BEFORE_DELIVERY",
+          "action": "ACTION_MESSAGE_DAY_BEFORE_DELIVERY"
+        },
+        {
+          "state": "STATE_DAY_BEFORE_DELIVERY",
+          "action": "ACTION_TRACKING_SCREEN_DAY_BEFORE_DELIVERY"
+        },
+        {
+          "state": "STATE_DAY_OF_DELIVERY",
+          "action": "ACTION_MESSAGE_DAY_OF_DELIVERY"
+        },
+        {
+          "state": "STATE_DAY_OF_DELIVERY",
+          "action": "ACTION_TRACKING_SCREEN_DAY_OF_DELIVERY"
+        },
+        {
+          "state": "STATE_DELIVERED",
+          "action": "ACTION_MESSAGE_ORDER_DELIVERED"
+        },
+        {
+          "state": "STATE_DELIVERED",
+          "action": "ACTION_TRACKING_SCREEN_ORDER_DELIVERED"
+        },
+        {
+          "state": "STATE_DELIVERED",
+          "action": "ACTION_TRACKING_SCREEN_COMPLETE"
+        },
+        {
+          "state": "STATE_DELIVERY_SETUP",
+          "action": "ACTION_MESSAGE_SETUP_DELIVERY_NOW"
+        },
+        {
+          "state": "STATE_DELIVERY_UNSUCCESSFUL",
+          "action": "ACTION_MESSAGE_DELIVERY_UNSUCCESSFUL"
+        },
+        {
+          "state": "STATE_DELIVERY_UNSUCCESSFUL",
+          "action": "ACTION_TRACKING_SCREEN_UNSUCCESSFUL"
+        },
+        {
+          "state": "STATE_DELIVERY_UNSUCCESSFUL",
+          "action": "ACTION_TRACKING_SCREEN_COMPLETE"
+        },
+        {
+          "state": "STATE_MISSED_APPOINTMENT_COURIER",
+          "action": "ACTION_MESSAGE_MISSED_APPOINTMENT_COURIER"
+        },
+        {
+          "state": "STATE_MISSED_APPOINTMENT_COURIER",
+          "action": "ACTION_TRACKING_SCREEN_MISSED_APPOINTMENT_COURIER"
+        },
+        {
+          "state": "STATE_MISSED_APPOINTMENT_CUSTOMER",
+          "action": "ACTION_MESSAGE_MISSED_APPOINTMENT_CUSTOMER"
+        },
+        {
+          "state": "STATE_MISSED_APPOINTMENT_CUSTOMER",
+          "action": "ACTION_TRACKING_SCREEN_MISSED_APPOINTMENT_CUSTOMER"
+        },
+        {
+          "state": "STATE_ORDER_COLLECTED_FROM_MANUFACTURER_DAILY",
+          "action": "ACTION_MESSAGE_ORDER_COLLECTED_BY_COURIER"
+        },
+        {
+          "state": "STATE_ORDER_COLLECTED_FROM_MANUFACTURER_DAILY",
+          "action": "ACTION_TRACKING_SCREEN_ORDER_COLLECTED_BY_COURIER"
+        },
+        {
+          "state": "STATE_ORDER_COLLECTED_FROM_MANUFACTURER_RENEWAL",
+          "action": "ACTION_MESSAGE_ORDER_COLLECTED_BY_COURIER"
+        },
+        {
+          "state": "STATE_ORDER_COLLECTED_FROM_MANUFACTURER_RENEWAL",
+          "action": "ACTION_TRACKING_SCREEN_ORDER_COLLECTED_BY_COURIER"
+        },
+        {
+          "state": "STATE_TRANSPORT_REQUEST_RECEIVED",
+          "action": "ACTION_SYSTEM_SEND_COURIER_FILE"
+        },
+        {
+          "state": "STATE_TRANSPORT_REQUEST_RECEIVED",
+          "action": "ACTION_TRACKING_SCREEN_INITIATE"
+        },
+        {
+          "state": "STATE_TRANSPORT_REQUEST_RECEIVED_REGULAR",
+          "action": "ACTION_MESSAGE_ORDER_PLACED"
+        },
+        {
+          "state": "STATE_TRANSPORT_REQUEST_RECEIVED_REGULAR",
+          "action": "ACTION_TRACKING_SCREEN_ORDER_PLACED"
+        },
+        {
+          "state": "STATE_TRANSPORT_REQUEST_RECEIVED_RENEWAL",
+          "action": "ACTION_MESSAGE_ORDER_PLACED"
+        },
+        {
+          "state": "STATE_TRANSPORT_REQUEST_RECEIVED_RENEWAL",
+          "action": "ACTION_TRACKING_SCREEN_ORDER_PLACED"
+        }
+      ],
+      "exit": []
+    },
+    "transition_table": [
+      {
+        "state": "STATE_TRANSPORT_REQUEST_RECEIVED",
+        "event": "EVENT_ETC_DAILY_DELIVERY_RECEIVED",
+        "state_next": "STATE_TRANSPORT_REQUEST_RECEIVED_REGULAR"
+      },
+      {
+        "state": "STATE_TRANSPORT_REQUEST_RECEIVED",
+        "event": "EVENT_ETC_RENEWAL_DELIVERY_RECEIVED",
+        "state_next": "STATE_TRANSPORT_REQUEST_RECEIVED_RENEWAL"
+      },
+      {
+        "state": "STATE_TRANSPORT_REQUEST_RECEIVED_REGULAR",
+        "event": "EVENT_022_CHECKED_OUT_SELBY",
+        "state_next": "STATE_ORDER_COLLECTED_FROM_MANUFACTURER_DAILY"
+      },
+      {
+        "state": "STATE_TRANSPORT_REQUEST_RECEIVED_RENEWAL",
+        "event": "EVENT_022_CHECKED_OUT_SELBY",
+        "state_next": "STATE_ORDER_COLLECTED_FROM_MANUFACTURER_RENEWAL"
+      },
+      {
+        "state": "STATE_ORDER_COLLECTED_FROM_MANUFACTURER_DAILY",
+        "event": "EVENT_002_CHECKED_IN_HUB",
+        "state_next": "STATE_DELIVERY_SCHEDULED"
+      },
+      {
+        "state": "STATE_ORDER_COLLECTED_FROM_MANUFACTURER_DAILY",
+        "event": "EVENT_032_CHECKED_IN_DHUB",
+        "state_next": "STATE_DELIVERY_SCHEDULED"
+      },
+      {
+        "state": "STATE_ORDER_COLLECTED_FROM_MANUFACTURER_RENEWAL",
+        "event": "EVENT_002_CHECKED_IN_HUB",
+        "state_next": "STATE_DELIVERY_SETUP"
+      },
+      {
+        "state": "STATE_ORDER_COLLECTED_FROM_MANUFACTURER_RENEWAL",
+        "event": "EVENT_032_CHECKED_IN_DHUB",
+        "state_next": "STATE_DELIVERY_SETUP"
+      },
+      {
+        "state": "STATE_DELIVERY_SETUP",
+        "event": "EVENT_ETC_CUSTOMER_DID_NOT_SETUP_DELIVERY",
+        "state_next": "STATE_CUSTOMER_HAS_NOT_SETUP_DELIVERY"
+      },
+      {
+        "state": "STATE_DELIVERY_SETUP",
+        "event": "EVENT_ETC_CUSTOMER_SETUP_DELIVERY",
+        "state_next": "STATE_CUSTOMER_HAS_SETUP_DELIVERY"
+      },
+      {
+        "state": "STATE_CUSTOMER_HAS_NOT_SETUP_DELIVERY",
+        "event": "EVENT_004_APPOINTMENT_SCHEDULED",
+        "state_next": "STATE_DELIVERY_SCHEDULED"
+      },
+      {
+        "state": "STATE_CUSTOMER_HAS_NOT_SETUP_DELIVERY",
+        "event": "EVENT_060_CUSTOMER_CONTACT_UNSUCCESSFUL_TEL_ATTEMPT1",
+        "state_next": "STATE_CUSTOMER_CONTACT_FAILED_ATTEMPT_1"
+      },
+      {
+        "state": "STATE_CUSTOMER_HAS_SETUP_DELIVERY",
+        "event": "EVENT_108_DAY_BEFORE_DELIVERY",
+        "state_next": "STATE_DAY_BEFORE_DELIVERY"
+      },
+      {
+        "state": "STATE_DAY_BEFORE_DELIVERY",
+        "event": "EVENT_109_ON_THE_DAY_OF_DELIVERY",
+        "state_next": "STATE_DAY_OF_DELIVERY"
+      },
+      {
+        "state": "STATE_DAY_OF_DELIVERY",
+        "event": "EVENT_001_DELIVERED_CLIENT",
+        "state_next": "STATE_DELIVERED"
+      },
+      {
+        "state": "STATE_DAY_OF_DELIVERY",
+        "event": "EVENT_016_DELIVERED_BRANCH",
+        "state_next": "STATE_DELIVERED"
+      },
+      {
+        "state": "STATE_DAY_OF_DELIVERY",
+        "event": "EVENT_049_DELIVERED_3RD_PARTY",
+        "state_next": "STATE_DELIVERED"
+      },
+      {
+        "state": "STATE_DAY_OF_DELIVERY",
+        "event": "EVENT_050_DELIVERED_KNOCKNDROP",
+        "state_next": "STATE_DELIVERED"
+      },
+      {
+        "state": "STATE_DAY_OF_DELIVERY",
+        "event": "EVENT_035_DELIVERED_COMPANY",
+        "state_next": "STATE_DELIVERED"
+      },
+      {
+        "state": "STATE_DAY_OF_DELIVERY",
+        "event": "EVENT_082_DELIVERY_FAILED_CUSTOMER_MISSED_APPOINTMENT",
+        "state_next": "STATE_MISSED_APPOINTMENT_CUSTOMER"
+      },
+      {
+        "state": "STATE_DAY_OF_DELIVERY",
+        "event": "EVENT_083_DELIVERY_FAILED_COURIER_MISSED_APPOINTMENT",
+        "state_next": "STATE_MISSED_APPOINTMENT_COURIER"
+      },
+      {
+        "state": "STATE_DELIVERED",
+        "event": "EVENT_004_APPOINTMENT_SCHEDULED",
+        "state_next": "STATE_DELIVERY_SCHEDULED"
+      },
+      {
+        "state": "STATE_DELIVERY_SCHEDULED",
+        "event": "EVENT_108_DAY_BEFORE_DELIVERY",
+        "state_next": "STATE_DAY_BEFORE_DELIVERY"
+      },
+      {
+        "state": "STATE_CUSTOMER_CONTACT_FAILED_ATTEMPT_1",
+        "event": "EVENT_004_APPOINTMENT_SCHEDULED",
+        "state_next": "STATE_DELIVERY_SCHEDULED"
+      },
+      {
+        "state": "STATE_CUSTOMER_CONTACT_FAILED_ATTEMPT_1",
+        "event": "EVENT_061_CUSTOMER_CONTACT_UNSUCCESSFUL_TEL_ATTEMPT2",
+        "state_next": "STATE_CUSTOMER_CONTACT_FAILED_ATTEMPT_2"
+      },
+      {
+        "state": "STATE_CUSTOMER_CONTACT_FAILED_ATTEMPT_2",
+        "event": "EVENT_004_APPOINTMENT_SCHEDULED",
+        "state_next": "STATE_DELIVERY_SCHEDULED"
+      },
+      {
+        "state": "STATE_CUSTOMER_CONTACT_FAILED_ATTEMPT_2",
+        "event": "EVENT_062_CUSTOMER_CONTACT_UNSUCCESSFUL_TEL_ATTEMPT3",
+        "state_next": "STATE_DELIVERY_UNSUCCESSFUL"
+      },
+      {
+        "state": "STATE_DELIVERY_UNSUCCESSFUL",
+        "event": "EVENT_004_APPOINTMENT_SCHEDULED",
+        "state_next": "STATE_DELIVERY_SCHEDULED"
+      },
+      {
+        "state": "STATE_MISSED_APPOINTMENT_CUSTOMER",
+        "event": "EVENT_001_DELIVERED_CLIENT",
+        "state_next": "STATE_DELIVERED"
+      },
+      {
+        "state": "STATE_MISSED_APPOINTMENT_CUSTOMER",
+        "event": "EVENT_016_DELIVERED_BRANCH",
+        "state_next": "STATE_DELIVERED"
+      },
+      {
+        "state": "STATE_MISSED_APPOINTMENT_CUSTOMER",
+        "event": "EVENT_049_DELIVERED_3RD_PARTY",
+        "state_next": "STATE_DELIVERED"
+      },
+      {
+        "state": "STATE_MISSED_APPOINTMENT_CUSTOMER",
+        "event": "EVENT_050_DELIVERED_KNOCKNDROP",
+        "state_next": "STATE_DELIVERED"
+      },
+      {
+        "state": "STATE_MISSED_APPOINTMENT_CUSTOMER",
+        "event": "EVENT_035_DELIVERED_COMPANY",
+        "state_next": "STATE_DELIVERED"
+      },
+      {
+        "state": "STATE_MISSED_APPOINTMENT_COURIER",
+        "event": "EVENT_083_DELIVERY_FAILED_COURIER_MISSED_APPOINTMENT",
+        "state_next": "STATE_MISSED_APPOINTMENT_COURIER"
+      },
+      {
+        "state": "STATE_MISSED_APPOINTMENT_COURIER",
+        "event": "EVENT_001_DELIVERED_CLIENT",
+        "state_next": "STATE_DELIVERED"
+      },
+      {
+        "state": "STATE_MISSED_APPOINTMENT_COURIER",
+        "event": "EVENT_016_DELIVERED_BRANCH",
+        "state_next": "STATE_DELIVERED"
+      },
+      {
+        "state": "STATE_MISSED_APPOINTMENT_COURIER",
+        "event": "EVENT_049_DELIVERED_3RD_PARTY",
+        "state_next": "STATE_DELIVERED"
+      },
+      {
+        "state": "STATE_MISSED_APPOINTMENT_COURIER",
+        "event": "EVENT_050_DELIVERED_KNOCKNDROP",
+        "state_next": "STATE_DELIVERED"
+      },
+      {
+        "state": "STATE_MISSED_APPOINTMENT_COURIER",
+        "event": "EVENT_035_DELIVERED_COMPANY",
+        "state_next": "STATE_DELIVERED"
+      }
+    ]
+  },
+  "chart": {
+    "settings": {
+      "expand_states": true,
+      "state_origin_centered": false
+    },
+    "indicators": {
+      "initial_state_indicator": {
+        "x": 950,
+        "y": 350,
+        "state": "STATE_TRANSPORT_REQUEST_RECEIVED"
+      },
+      "terminal_state_indicators": [
+        {
+          "id": 0,
+          "x": 1250,
+          "y": 2800
+        },
+        {
+          "id": 1,
+          "x": 350,
+          "y": 3250
+        }
+      ],
+      "terminal_state_transitions": [
+        {
+          "state": "STATE_DELIVERED",
+          "terminal_state_indicator_id": 0
+        },
+        {
+          "state": "STATE_DELIVERY_UNSUCCESSFUL",
+          "terminal_state_indicator_id": 1
+        }
+      ]
+    },
+    "states": [
+      {
+        "state": "STATE_TRANSPORT_REQUEST_RECEIVED",
+        "x": 800,
+        "y": 500,
+        "height": 60
+      },
+      {
+        "state": "STATE_TRANSPORT_REQUEST_RECEIVED_REGULAR",
+        "x": 1400,
+        "y": 500,
+        "height": 60
+      },
+      {
+        "state": "STATE_TRANSPORT_REQUEST_RECEIVED_RENEWAL",
+        "x": 200,
+        "y": 500,
+        "height": 60
+      },
+      {
+        "state": "STATE_CUSTOMER_HAS_SETUP_DELIVERY",
+        "x": 2600,
+        "y": 1300,
+        "height": 60
+      },
+      {
+        "state": "STATE_CUSTOMER_HAS_NOT_SETUP_DELIVERY",
+        "x": 200,
+        "y": 1700,
+        "height": 60
+      },
+      {
+        "state": "STATE_DELIVERY_SETUP",
+        "x": 200,
+        "y": 1300,
+        "height": 200
+      },
+      {
+        "state": "STATE_ORDER_COLLECTED_FROM_MANUFACTURER_DAILY",
+        "x": 1400,
+        "y": 1900,
+        "height": 60
+      },
+      {
+        "state": "STATE_ORDER_COLLECTED_FROM_MANUFACTURER_RENEWAL",
+        "x": 200,
+        "y": 900,
+        "height": 60
+      },
+      {
+        "state": "STATE_DELIVERY_SCHEDULED",
+        "x": 1400,
+        "y": 2300,
+        "height": 200
+      },
+      {
+        "state": "STATE_CUSTOMER_CONTACT_FAILED_ATTEMPT_1",
+        "x": 200,
+        "y": 2100,
+        "height": 60
+      },
+      {
+        "state": "STATE_CUSTOMER_CONTACT_FAILED_ATTEMPT_2",
+        "x": 200,
+        "y": 2500,
+        "height": 60
+      },
+      {
+        "state": "STATE_DAY_BEFORE_DELIVERY",
+        "x": 2600,
+        "y": 2300,
+        "height": 60
+      },
+      {
+        "state": "STATE_DAY_OF_DELIVERY",
+        "x": 2600,
+        "y": 2700,
+        "height": 60
+      },
+      {
+        "state": "STATE_DELIVERED",
+        "x": 1400,
+        "y": 2700,
+        "height": 60
+      },
+      {
+        "state": "STATE_MISSED_APPOINTMENT_CUSTOMER",
+        "x": 1400,
+        "y": 3500,
+        "height": 60
+      },
+      {
+        "state": "STATE_MISSED_APPOINTMENT_COURIER",
+        "x": 2600,
+        "y": 3500,
+        "height": 60
+      },
+      {
+        "state": "STATE_DELIVERY_UNSUCCESSFUL",
+        "x": 200,
+        "y": 2900,
+        "height": 60
+      }
+    ],
+    "draft_transitions": []
+  },
+  "solver": {
+    "sequences": []
+  },
+  "simulator": {
+    "sequences": [
+      {
+        "name": "sequence_1",
+        "description": "",
+        "sequence": [
+          "EVENT_ETC_DAILY_DELIVERY_RECEIVED"
+        ]
+      }
+    ]
+  }
+}
