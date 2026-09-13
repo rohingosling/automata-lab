@@ -1,0 +1,21 @@
+# Public-repository-owned exclusions preserved across promotion.
+
+# Installed dependencies and generated application output.
+automata-web/node_modules/
+automata-web/dist/
+automata-web/coverage/
+**/playwright-report/
+**/test-results/
+**/*.map
+
+# Local environment files and credentials.
+.env
+.env.*
+*.pem
+*.key
+
+# Editor and operating-system state.
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
