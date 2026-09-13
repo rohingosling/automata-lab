@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+    <title id="title">Automata Lab hero screenshot placeholder</title>
+    <desc id="description">A placeholder graphic to be replaced by an Automata Lab application screenshot.</desc>
+    <rect width="1200" height="630" rx="18" fill="#111827" />
+    <rect x="28" y="28" width="1144" height="574" rx="12" fill="#1f2937" stroke="#64748b" stroke-width="2" />
+    <rect x="54" y="54" width="1092" height="48" rx="7" fill="#334155" />
+    <circle cx="83" cy="78" r="8" fill="#ef4444" />
+    <circle cx="109" cy="78" r="8" fill="#f59e0b" />
+    <circle cx="135" cy="78" r="8" fill="#22c55e" />
+    <rect x="54" y="126" width="258" height="450" rx="7" fill="#273449" />
+    <rect x="336" y="126" width="810" height="328" rx="7" fill="#182235" />
+    <rect x="336" y="478" width="810" height="98" rx="7" fill="#273449" />
+    <text x="741" y="260" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="54" font-weight="600" text-anchor="middle">Automata Lab</text>
+    <text x="741" y="318" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="27" text-anchor="middle">Application screenshot placeholder</text>
+    <text x="741" y="360" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="20" text-anchor="middle">Replace this image with the final GitHub Pages hero screenshot</text>
+</svg>

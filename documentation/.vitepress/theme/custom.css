@@ -1,0 +1,71 @@
+/*
+ * Automata Lab documentation theme adjustments.
+ */
+
+.VPHomeFeatures + .vp-doc
+{
+    margin-top: 24px;
+}
+:root
+{
+    --vp-c-brand-1:           #4059ad;
+    --vp-c-brand-2:           #344a94;
+    --vp-button-brand-bg:     #4059ad;
+    --vp-button-brand-hover-bg: #344a94;
+}
+
+.dark
+{
+    --vp-c-brand-1:           #aebcff;
+    --vp-c-brand-2:           #c2ccff;
+    --vp-button-brand-bg:     #4059ad;
+    --vp-button-brand-hover-bg: #344a94;
+}
+
+/* Guide figures retain their aspect ratio and link to the original image. */
+.vp-doc .guide-figure
+{
+    margin: 32px 0;
+    scroll-margin-top: 96px;
+}
+
+.vp-doc .guide-figure > a
+{
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.vp-doc .guide-figure img
+{
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var( --vp-c-divider );
+}
+
+.vp-doc .guide-figure > a:focus-visible
+{
+    outline: 3px solid var( --vp-c-brand-1 );
+    outline-offset: 4px;
+}
+
+.vp-doc .guide-figure figcaption
+{
+    margin-top: 12px;
+    color: var( --vp-c-text-2 );
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.vp-doc .guide-figure--narrow > a
+{
+    max-width: 390px;
+}
+
+.vp-doc .guide-figure--report > a
+{
+    max-width: min( 100%, 540px );
+}

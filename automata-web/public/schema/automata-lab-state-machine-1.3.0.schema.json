@@ -1,0 +1,660 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rohingosling.github.io/automata-lab/schema/automata-lab-state-machine-1.3.0.schema.json",
+  "title": "Automata Lab State Machine 1.3.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "file_id",
+    "file_version",
+    "settings",
+    "state_machine",
+    "chart",
+    "solver",
+    "simulator"
+  ],
+  "properties": {
+    "file_id": {
+      "const": "automata-lab-state-machine"
+    },
+    "file_version": {
+      "const": "1.3.0"
+    },
+    "settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "description",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 4096
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+        }
+      }
+    },
+    "state_machine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "initial_state",
+        "events",
+        "states",
+        "actions",
+        "state_actions",
+        "transition_table"
+      ],
+      "properties": {
+        "initial_state": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          ]
+        },
+        "events": {
+          "type": "array",
+          "maxItems": 256,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "description"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "description": {
+                "type": "string",
+                "maxLength": 4096
+              }
+            }
+          }
+        },
+        "states": {
+          "type": "array",
+          "maxItems": 10000,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "description"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "description": {
+                "type": "string",
+                "maxLength": 4096
+              }
+            }
+          }
+        },
+        "actions": {
+          "type": "array",
+          "maxItems": 1000,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "description"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "description": {
+                "type": "string",
+                "maxLength": 4096
+              }
+            }
+          }
+        },
+        "state_actions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "entry",
+            "exit"
+          ],
+          "properties": {
+            "entry": {
+              "type": "array",
+              "maxItems": 50000,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "state",
+                  "action"
+                ],
+                "properties": {
+                  "state": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "action": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  }
+                }
+              }
+            },
+            "exit": {
+              "type": "array",
+              "maxItems": 50000,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "state",
+                  "action"
+                ],
+                "properties": {
+                  "state": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "action": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  }
+                }
+              }
+            }
+          }
+        },
+        "transition_table": {
+          "type": "array",
+          "maxItems": 50000,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "state",
+              "event",
+              "state_next"
+            ],
+            "properties": {
+              "state": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "event": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "state_next": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              }
+            }
+          }
+        }
+      }
+    },
+    "chart": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "settings",
+        "indicators",
+        "states"
+      ],
+      "properties": {
+        "settings": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "expand_states"
+          ],
+          "properties": {
+            "expand_states": {
+              "type": "boolean"
+            },
+            "state_origin_centered": {
+              "type": "boolean"
+            }
+          }
+        },
+        "indicators": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "initial_state_indicator"
+          ],
+          "properties": {
+            "initial_state_indicator": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "x",
+                    "y"
+                  ],
+                  "properties": {
+                    "state": {
+                      "anyOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 128
+                        }
+                      ]
+                    },
+                    "x": {
+                      "type": "number"
+                    },
+                    "y": {
+                      "type": "number"
+                    }
+                  }
+                }
+              ]
+            },
+            "terminal_state_indicators": {
+              "type": "array",
+              "maxItems": 10000,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "x",
+                  "y"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "terminal_state_transitions": {
+              "type": "array",
+              "maxItems": 10000,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "state",
+                  "terminal_state_indicator_id"
+                ],
+                "properties": {
+                  "state": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "terminal_state_indicator_id": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  }
+                }
+              }
+            },
+            "indicator_transitions": {
+              "type": "array",
+              "maxItems": 10000,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "source",
+                  "target"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "source": {
+                    "$ref": "#/$defs/chartIndicatorReference"
+                  },
+                  "target": {
+                    "$ref": "#/$defs/chartIndicatorReference"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "states": {
+          "type": "array",
+          "maxItems": 10000,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "state",
+              "x",
+              "y"
+            ],
+            "properties": {
+              "state": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 4096
+              },
+              "height": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 4096
+              }
+            }
+          }
+        },
+        "draft_transitions": {
+          "type": "array",
+          "maxItems": 10000,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "source",
+              "target"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "source": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  }
+                }
+              },
+              "target": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  }
+                }
+              },
+              "source_state": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "target_state": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "remembered_event": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "remembered_transition_index": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 49999
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "source_indicator": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/chartIndicatorReference"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "target_indicator": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/chartIndicatorReference"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "solver": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequences"
+      ],
+      "properties": {
+        "sequences": {
+          "type": "array",
+          "maxItems": 1000,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "description",
+              "start_context",
+              "sequence"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "description": {
+                "type": "string",
+                "maxLength": 4096
+              },
+              "start_context": {
+                "enum": [
+                  "initial",
+                  "continuation",
+                  "infer"
+                ]
+              },
+              "sequence": {
+                "type": "array",
+                "maxItems": 50000,
+                "items": {
+                  "type": "string",
+                  "maxLength": 128
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "simulator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequences"
+      ],
+      "properties": {
+        "sequences": {
+          "type": "array",
+          "maxItems": 1000,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "description",
+              "sequence"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "description": {
+                "type": "string",
+                "maxLength": 4096
+              },
+              "sequence": {
+                "type": "array",
+                "maxItems": 10000,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "chartIndicatorReference": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "initial"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "id"
+          ],
+          "properties": {
+            "kind": {
+              "const": "terminal"
+            },
+            "id": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          }
+        }
+      ]
+    }
+  }
+}
