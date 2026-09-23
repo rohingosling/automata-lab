@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "source": "Microsoft Fluent UI System Icons",
+  "icons": [
+    {
+      "destination": "ic_fluent_arrow_download_16_regular.svg",
+      "source": "Arrow Download/SVG/ic_fluent_arrow_download_16_regular.svg",
+      "sha256": "843a60ca44e0ab9e5eacefe8e21cde68a83f56ed3e088921d19ff93ac32d273c"
+    },
+    {
+      "destination": "ic_fluent_arrow_download_20_regular.svg",
+      "source": "Arrow Download/SVG/ic_fluent_arrow_download_20_regular.svg",
+      "sha256": "28e752ccfd95feb1850de1da3d170f34fd31765417d3431a7dbf3da89840ea33"
+    },
+    {
+      "destination": "ic_fluent_arrow_export_16_regular.svg",
+      "source": "Arrow Export/SVG/ic_fluent_arrow_export_16_regular.svg",
+      "sha256": "dbe95912e06267fb57c46eb337c433ca548ed8a9c91f3e6689ac9c04682c9578"
+    },
+    {
+      "destination": "ic_fluent_arrow_import_16_regular.svg",
+      "source": "Arrow Import/SVG/ic_fluent_arrow_import_16_regular.svg",
+      "sha256": "4cf4eced5e67cf28e32c96073813d4fea1d9afa02bf835ef100aefbee937e7dc"
+    },
+    {
+      "destination": "ic_fluent_arrow_redo_16_regular.svg",
+      "source": "Arrow Redo/SVG/ic_fluent_arrow_redo_16_regular.svg",
+      "sha256": "34e3a4130fb91e7a04ee685f4f3a1708567570afde6a812b91ef235a45a248e4"
+    },
+    {
+      "destination": "ic_fluent_arrow_redo_20_regular.svg",
+      "source": "Arrow Redo/SVG/ic_fluent_arrow_redo_20_regular.svg",
+      "sha256": "374ec6ed97949ac3ae5ec6739c283f16a4a56fa7ad374b33e0b15d4d2154b991"
+    },
+    {
+      "destination": "ic_fluent_arrow_undo_16_regular.svg",
+      "source": "Arrow Undo/SVG/ic_fluent_arrow_undo_16_regular.svg",
+      "sha256": "0530e3e4f17b4ed4d18bba8cc7c00e0f54bc1bac237db37a14793bdbc0f733b0"
+    },
+    {
+      "destination": "ic_fluent_arrow_undo_20_regular.svg",
+      "source": "Arrow Undo/SVG/ic_fluent_arrow_undo_20_regular.svg",
+      "sha256": "a6f6566eb86df531ce5332ab4153b056fb8ff8af37655058f30afaf127892a2f"
+    },
+    {
+      "destination": "ic_fluent_arrow_upload_16_regular.svg",
+      "source": "Arrow Upload/SVG/ic_fluent_arrow_upload_16_regular.svg",
+      "sha256": "e4d23907f4b78441189909ad901fb915212b5ef614d071d3ed7e585cd81d0e40"
+    },
+    {
+      "destination": "ic_fluent_arrow_upload_20_regular.svg",
+      "source": "Arrow Upload/SVG/ic_fluent_arrow_upload_20_regular.svg",
+      "sha256": "71fa5eb00acbd3475aeb83fc3a85d77eed7d537e0bbb0048cbe78261f3e64690"
+    },
+    {
+      "destination": "ic_fluent_clipboard_paste_16_regular.svg",
+      "source": "Clipboard Paste/SVG/ic_fluent_clipboard_paste_16_regular.svg",
+      "sha256": "8bd4026f393fff7d7d1d84ae3efb446dd7398a80397cd514d9c9ccb4d758640c"
+    },
+    {
+      "destination": "ic_fluent_clipboard_task_list_16_regular.svg",
+      "source": "Clipboard Task List/SVG/ic_fluent_clipboard_task_list_16_regular.svg",
+      "sha256": "bbf2c899a2aeca2877683d571f4d00540c068b2efb4c78322a27f20eb40cea00"
+    },
+    {
+      "destination": "ic_fluent_copy_16_regular.svg",
+      "source": "Copy/SVG/ic_fluent_copy_16_regular.svg",
+      "sha256": "bb663b3d689f301b300940d4fda03602b175d3763ecb4cb6ea2eb8385d5b27a6"
+    },
+    {
+      "destination": "ic_fluent_cut_16_regular.svg",
+      "source": "Cut/SVG/ic_fluent_cut_16_regular.svg",
+      "sha256": "bfb6f7181e1777458e4cd35a1411c84d8a1ea294ce1bbb45fb8c708051263f3c"
+    },
+    {
+      "destination": "ic_fluent_dark_theme_20_regular.svg",
+      "source": "Dark Theme/SVG/ic_fluent_dark_theme_20_regular.svg",
+      "sha256": "caa1b69fb3c868758f8f7fe756287b9927664ee0e8e9222803e51c84c919a2d6"
+    },
+    {
+      "destination": "ic_fluent_dismiss_16_regular.svg",
+      "source": "Dismiss/SVG/ic_fluent_dismiss_16_regular.svg",
+      "sha256": "118c94c171be3364e5104983a97ba3d37d53b21ebc4d6f127eef31dc4aa76716"
+    },
+    {
+      "destination": "ic_fluent_document_add_16_regular.svg",
+      "source": "Document Add/SVG/ic_fluent_document_add_16_regular.svg",
+      "sha256": "b490668c92910d144f605ffb8d0657ce435abdbb75088b9d40f64e5530c69dae"
+    },
+    {
+      "destination": "ic_fluent_document_add_20_regular.svg",
+      "source": "Document Add/SVG/ic_fluent_document_add_20_regular.svg",
+      "sha256": "c1f4e03272d61879004fc466c3e0686d283e282521aa4b3802af740ec4156361"
+    },
+    {
+      "destination": "ic_fluent_document_dismiss_16_regular.svg",
+      "source": "Document Dismiss/SVG/ic_fluent_document_dismiss_16_regular.svg",
+      "sha256": "c52b2dbe6402adea1ca586fe989d2d88d35a6d056dc9bb0aea3de84debdb40d0"
+    },
+    {
+      "destination": "ic_fluent_document_settings_16_regular.svg",
+      "source": "Document Settings/SVG/ic_fluent_document_settings_16_regular.svg",
+      "sha256": "0c0118628bc75f86ccf7e1e42a3af4d15a6a582135fc39f93f2438bb4631f0cc"
+    },
+    {
+      "destination": "ic_fluent_folder_open_16_regular.svg",
+      "source": "Folder Open/SVG/ic_fluent_folder_open_16_regular.svg",
+      "sha256": "484d0a09af2d1beac370a342a7df91629f96c38ab547ee9e7b66675d3376b74f"
+    },
+    {
+      "destination": "ic_fluent_folder_open_20_regular.svg",
+      "source": "Folder Open/SVG/ic_fluent_folder_open_20_regular.svg",
+      "sha256": "c5f8b2db9af20a454c1f05ce6eda4b21c99f1b8677b14b6d7d07d5817140a487"
+    },
+    {
+      "destination": "ic_fluent_print_16_regular.svg",
+      "source": "Print/SVG/ic_fluent_print_16_regular.svg",
+      "sha256": "e49915c6a30796d14d3507226892fb364025e5ecfc2ffa3c6e819e2acd1f2a4f"
+    },
+    {
+      "destination": "ic_fluent_save_16_regular.svg",
+      "source": "Save/SVG/ic_fluent_save_16_regular.svg",
+      "sha256": "cd9f751bfe5b3fdd2ccb239ba8e12e0619807fbb8c7b42591a20d98d64f602a7"
+    },
+    {
+      "destination": "ic_fluent_save_20_regular.svg",
+      "source": "Save/SVG/ic_fluent_save_20_regular.svg",
+      "sha256": "fdfbcf9c469ff958782a3f8ab4659c7f1c48062752bb6324b07e5bbb70f52969"
+    },
+    {
+      "destination": "ic_fluent_save_copy_20_regular.svg",
+      "source": "Save Copy/SVG/ic_fluent_save_copy_20_regular.svg",
+      "sha256": "30766e9e1322443f30e8d765393b414999a479213032039e40e6eec0e6ae0c1c"
+    },
+    {
+      "destination": "ic_fluent_settings_16_regular.svg",
+      "source": "Settings/SVG/ic_fluent_settings_16_regular.svg",
+      "sha256": "40ff3be0796d839fcfa2876c9ee4c585260e884bc864aa523c9159a0134c06ba"
+    },
+    {
+      "destination": "ic_fluent_settings_20_regular.svg",
+      "source": "Settings/SVG/ic_fluent_settings_20_regular.svg",
+      "sha256": "ac5bdb808bed91dc8c0b6f346e7a0a1ee1901fc4b50f5641987498a65e200685"
+    },
+    {
+      "destination": "ic_fluent_weather_moon_16_regular.svg",
+      "source": "Weather Moon/SVG/ic_fluent_weather_moon_16_regular.svg",
+      "sha256": "4cb48217d150b762835860a35324984bd9c3cb74291030dd6e2ccdc27303c4d8"
+    },
+    {
+      "destination": "ic_fluent_weather_sunny_16_regular.svg",
+      "source": "Weather Sunny/SVG/ic_fluent_weather_sunny_16_regular.svg",
+      "sha256": "6d1e5f055c765779978e8c27611238eed8c265d70e90036ad172a89c8ee4baa5"
+    }
+  ]
+}
