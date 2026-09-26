@@ -1,0 +1,240 @@
+{
+  "file_id": "automata-lab-state-machine",
+  "file_version": "1.0.0",
+  "settings": {
+    "name": "state_machine_comprehensive",
+    "description": "Exercises partial transitions, ordered duplicate actions, entry and exit outputs, chart projection, and saved sequences.",
+    "version": "1.0.0"
+  },
+  "state_machine": {
+    "initial_state": "state_idle",
+    "events": [
+      {
+        "name": "event_start",
+        "description": "Start processing."
+      },
+      {
+        "name": "event_tick",
+        "description": "Advance or repeat processing."
+      },
+      {
+        "name": "event_finish",
+        "description": "Finish processing."
+      },
+      {
+        "name": "event_reset",
+        "description": "Return to the idle state."
+      }
+    ],
+    "states": [
+      {
+        "name": "state_idle",
+        "description": "Waiting for work."
+      },
+      {
+        "name": "state_active",
+        "description": "Processing work."
+      },
+      {
+        "name": "state_complete",
+        "description": "Processing is complete."
+      }
+    ],
+    "actions": [
+      {
+        "name": "action_log",
+        "description": "Report a lifecycle entry."
+      },
+      {
+        "name": "action_begin",
+        "description": "Report that processing began."
+      },
+      {
+        "name": "action_finish",
+        "description": "Report that processing finished."
+      },
+      {
+        "name": "action_leave",
+        "description": "Report that a state was exited."
+      }
+    ],
+    "state_actions": {
+      "entry": [
+        {
+          "state": "state_idle",
+          "action": "action_log"
+        },
+        {
+          "state": "state_active",
+          "action": "action_begin"
+        },
+        {
+          "state": "state_active",
+          "action": "action_log"
+        },
+        {
+          "state": "state_active",
+          "action": "action_log"
+        },
+        {
+          "state": "state_complete",
+          "action": "action_finish"
+        }
+      ],
+      "exit": [
+        {
+          "state": "state_idle",
+          "action": "action_leave"
+        },
+        {
+          "state": "state_active",
+          "action": "action_leave"
+        }
+      ]
+    },
+    "transition_table": [
+      {
+        "state": "state_idle",
+        "event": "event_start",
+        "state_next": "state_active"
+      },
+      {
+        "state": "state_active",
+        "event": "event_tick",
+        "state_next": "state_active"
+      },
+      {
+        "state": "state_active",
+        "event": "event_finish",
+        "state_next": "state_complete"
+      },
+      {
+        "state": "state_complete",
+        "event": "event_reset",
+        "state_next": "state_idle"
+      }
+    ]
+  },
+  "chart": {
+    "settings": {
+      "expand_states": true,
+      "state_origin_centered": false
+    },
+    "indicators": {
+      "initial_state_indicator": {
+        "state": "state_idle",
+        "x": 40,
+        "y": 120
+      },
+      "terminal_state_indicators": [
+        {
+          "id": 0,
+          "x": 640,
+          "y": 120
+        }
+      ],
+      "terminal_state_transitions": [
+        {
+          "state": "state_complete",
+          "terminal_state_indicator_id": 0
+        },
+        {
+          "state": "state_active",
+          "terminal_state_indicator_id": 0
+        }
+      ]
+    },
+    "states": [
+      {
+        "state": "state_idle",
+        "x": 26,
+        "y": 89,
+        "height": 62
+      },
+      {
+        "state": "state_active",
+        "x": 226,
+        "y": 89,
+        "height": 62
+      },
+      {
+        "state": "state_complete",
+        "x": 426,
+        "y": 89,
+        "height": 62
+      }
+    ],
+    "draft_transitions": []
+  },
+  "solver": {
+    "sequences": [
+      {
+        "name": "initial_to_complete",
+        "description": "Complete path from the explicit initial state.",
+        "start_context": "initial",
+        "sequence": [
+          "state_idle",
+          "action_log",
+          "event_start",
+          "action_begin",
+          "state_active",
+          "action_log",
+          "action_log",
+          "event_finish",
+          "state_complete",
+          "action_finish"
+        ]
+      },
+      {
+        "name": "active_fragment",
+        "description": "A continuation fragment containing a self-transition.",
+        "start_context": "continuation",
+        "sequence": [
+          "action_begin",
+          "state_active",
+          "action_log",
+          "action_log",
+          "event_tick",
+          "state_active",
+          "action_begin",
+          "action_log",
+          "action_log"
+        ]
+      },
+      {
+        "name": "inferred_reset",
+        "description": "A fragment whose attachment may be inferred.",
+        "start_context": "infer",
+        "sequence": [
+          "state_complete",
+          "action_finish",
+          "event_reset",
+          "action_log",
+          "state_idle"
+        ]
+      }
+    ]
+  },
+  "simulator": {
+    "sequences": [
+      {
+        "name": "ordinary_run",
+        "description": "Run through the complete processing path.",
+        "sequence": [
+          "event_start",
+          "event_tick",
+          "event_finish"
+        ]
+      },
+      {
+        "name": "negative_events",
+        "description": "Exercise an undeclared event and a missing transition.",
+        "sequence": [
+          "event_unknown",
+          "event_finish",
+          "event_start"
+        ]
+      }
+    ]
+  }
+}
